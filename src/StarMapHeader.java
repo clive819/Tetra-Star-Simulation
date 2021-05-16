@@ -4,8 +4,10 @@ public interface StarMapHeader {
 
     String getLocationID();
 
-    StarMapHeader encrypted(THero tHero, String date);
+    StarMapHeader encrypted(THero tHero, String date, String symbol);
 
     StarMapHeader decrypted(THero tHero);
+
+    boolean isEncrypted();
 
 }

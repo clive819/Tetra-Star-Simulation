@@ -17,14 +17,19 @@ public class StarMapUnencryptedHeader implements StarMapHeader {
     }
 
     @Override
-    public StarMapHeader encrypted(THero tHero, String date) {
-        return new StarMapEncryptedHeader(this, tHero, date);
+    public StarMapHeader encrypted(THero tHero, String date, String symbol) {
+        return new StarMapEncryptedHeader(this, tHero, date, symbol);
     }
 
 
     @Override
     public StarMapHeader decrypted(THero tHero) {
         return this;
+    }
+
+    @Override
+    public boolean isEncrypted() {
+        return false;
     }
 
 }

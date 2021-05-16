@@ -21,9 +21,9 @@ public class StarAtlasHeader implements StarMapHeader {
     }
 
     @Override
-    public StarMapHeader encrypted(THero tHero, String date) {
+    public StarMapHeader encrypted(THero tHero, String date, String symbol) {
         for (StarMap map : maps) {
-            map.encrypt(tHero, date);
+            map.encrypt(tHero, date, symbol);
         }
         return this;
     }
@@ -34,6 +34,14 @@ public class StarAtlasHeader implements StarMapHeader {
             map.decrypt(tHero);
         }
         return this;
+    }
+
+    @Override
+    public boolean isEncrypted() {
+        if (!maps.isEmpty()) {
+            return maps.get(0).header.isEncrypted();
+        }
+        return false;
     }
 
     public void addStarMap(StarMap map) {
