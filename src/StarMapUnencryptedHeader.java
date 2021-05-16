@@ -24,7 +24,7 @@ public class StarMapUnencryptedHeader implements StarMapHeader {
 
     @Override
     public StarMapHeader decrypted(THero tHero) {
-        return null;
+        return this;
     }
 
 }

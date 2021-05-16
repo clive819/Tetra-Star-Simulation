@@ -24,15 +24,12 @@ public class StarMapEncryptedHeader implements StarMapHeader {
 
     @Override
     public StarMapHeader encrypted(THero tHero, String date) {
-        return null;
+        return this;
     }
 
     @Override
     public StarMapHeader decrypted(THero tHero) {
-        if (tHero == this.tHero) {
-            return this.header;
-        }
-        return this;
+        return this.header;
     }
 
     public String getHeroID() {
