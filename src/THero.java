@@ -3,7 +3,7 @@ public class THero extends TRover implements TFlierOperations {
     TFlier tFlier;
     Location base;
 
-    public THero(int id, Gender gender, TFace tFace, Location location) {
+    public THero(String id, Gender gender, TFace tFace, Location location) {
         super(id, gender, tFace, location);
         this.base = location;
     }

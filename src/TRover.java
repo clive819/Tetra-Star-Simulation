@@ -1,13 +1,13 @@
 public class TRover {
 
-    public int id;
+    public String id;
     public Gender gender;
 
     // the surface that TetRover reside in
     public TFace tFace;
     public Location currentLocation;
 
-    public TRover(int id, Gender gender, TFace tFace, Location location) {
+    public TRover(String id, Gender gender, TFace tFace, Location location) {
         this.id = id;
         this.tFace = tFace;
         this.gender = gender;

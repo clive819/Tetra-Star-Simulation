@@ -4,11 +4,13 @@ public class Location {
     int col;
     TRover rover;
     Terrain terrain;
+    String id;
 
-    public Location(Terrain terrain, int row, int col) {
+    public Location(Terrain terrain, int row, int col, String id) {
         this.row = row;
         this.col = col;
         this.terrain = terrain;
+        this.id = id;
     }
 
     public boolean isEmpty() {
