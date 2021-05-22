@@ -1,7 +1,7 @@
 package main.java.starMap;
 
-import main.java.TLogger;
 import main.java.characters.THero;
+import main.java.logging.TLogger;
 
 public class StarMap {
 

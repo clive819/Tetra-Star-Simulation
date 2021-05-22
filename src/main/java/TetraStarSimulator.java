@@ -2,6 +2,7 @@ package main.java;
 
 import main.java.locations.TRectangularFace;
 import main.java.locations.Tetra;
+import main.java.logging.TLogger;
 import main.java.ui.TetraUI;
 import main.java.ui.TetraUIDrawingPanel;
 
@@ -15,15 +16,15 @@ public class TetraStarSimulator {
     }
 
     public void start() {
-        System.out.println("start");
+        TLogger.shared.log("start");
     }
 
     public void stop() {
-        System.out.println("stop");
+        TLogger.shared.log("stop");
     }
 
     public void nextStep() {
-        System.out.println("nextStep");
+        TLogger.shared.log("nextStep");
     }
 
     public void render(Graphics g, TetraUIDrawingPanel p) {

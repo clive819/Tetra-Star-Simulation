@@ -1,8 +1,8 @@
 package main.java.characters;
 
-import main.java.TLogger;
 import main.java.locations.Location;
 import main.java.locations.TFace;
+import main.java.logging.TLogger;
 
 public class TRover {
 

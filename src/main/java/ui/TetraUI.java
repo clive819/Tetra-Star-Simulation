@@ -1,6 +1,7 @@
 package main.java.ui;
 
 import main.java.SimulationUIMediator;
+import main.java.logging.TLogger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +63,8 @@ public class TetraUI {
 
             setSize(1200, 600);
             setVisible(true);
+
+            TLogger.shared.setOutput(textPanel);
         }
 
         private void setMediator(SimulationUIMediator mediator) {
