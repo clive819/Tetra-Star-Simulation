@@ -4,8 +4,6 @@ import main.java.SimulationUIMediator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Comparator;
 
 public class TetraUIDrawingPanel extends JPanel {
 
@@ -21,30 +19,30 @@ public class TetraUIDrawingPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(mediator != null) {
+        if (mediator != null) {
             mediator.render(g, this);
         }
     }
 
-    public double getXScale(){
-        return (double)getWidth()/WIDTH;
+    public double getXScale() {
+        return (double) getWidth() / WIDTH;
     }
 
-    public double getYScale(){
-        return (double)getHeight()/HEIGHT;
+    public double getYScale() {
+        return (double) getHeight() / HEIGHT;
     }
 
     //given an x/y value, convert it to the proper x/y relative to the max WIDTH and HEIGHT
-    public int xScale(int x){
-        return (int)((double)x*getWidth()/WIDTH);
+    public int xScale(int x) {
+        return (int) ((double) x * getWidth() / WIDTH);
     }
 
-    public int yScale(int y){
-        return (int)((double)y*getHeight()/HEIGHT);
+    public int yScale(int y) {
+        return (int) ((double) y * getHeight() / HEIGHT);
     }
 
     public void setMediator(SimulationUIMediator mediator) {
-        if(this.mediator == null) {
+        if (this.mediator == null) {
             this.mediator = mediator;
             mediator.setDrawingPanel(this);
         }

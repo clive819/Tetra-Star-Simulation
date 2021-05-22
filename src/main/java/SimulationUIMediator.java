@@ -11,40 +11,40 @@ public class SimulationUIMediator {
     private TetraStarSimulator simulation;
 
     public void setButtonsPanel(TetraUIButtonsPanel buttonsPanel) {
-        if(this.buttonsPanel == null) {
+        if (this.buttonsPanel == null) {
             this.buttonsPanel = buttonsPanel;
         }
     }
 
     public void setSimulation(TetraStarSimulator simulation) {
-        if(this.simulation == null) {
+        if (this.simulation == null) {
             this.simulation = simulation;
         }
     }
 
     public void setDrawingPanel(TetraUIDrawingPanel drawingPanel) {
-        if(this.drawingPanel == null) {
+        if (this.drawingPanel == null) {
             this.drawingPanel = drawingPanel;
         }
     }
 
-    public void start(){
+    public void start() {
         simulation.start();
     }
 
-    public void stop(){
+    public void stop() {
         simulation.stop();
     }
 
-    public void nextStep(){
+    public void nextStep() {
         simulation.nextStep();
     }
 
-    public void render(Graphics g, TetraUIDrawingPanel p){
+    public void render(Graphics g, TetraUIDrawingPanel p) {
         simulation.render(g, p);
     }
 
-    public void updateRender(){
+    public void updateRender() {
         this.drawingPanel.repaint();
     }
 }

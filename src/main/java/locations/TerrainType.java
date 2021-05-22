@@ -4,5 +4,6 @@ public enum TerrainType {
     heroBase,
     vaderBase,
     mapBase,
-    river
+    river,
+    ground
 }

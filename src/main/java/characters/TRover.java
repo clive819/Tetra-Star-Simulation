@@ -1,13 +1,14 @@
 package main.java.characters;
 
+import main.java.TLogger;
 import main.java.locations.Location;
 import main.java.locations.TFace;
-import main.java.TLogger;
 
 public class TRover {
 
     public String id;
     public Gender gender;
+    public static int count = 0;
 
     // the surface that TetRover reside in
     public TFace tFace;
@@ -18,6 +19,7 @@ public class TRover {
         this.tFace = tFace;
         this.gender = gender;
         this.currentLocation = location;
+        count += 1;
     }
 
 

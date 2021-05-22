@@ -25,6 +25,10 @@ public class Location {
         this.rover = rover;
     }
 
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
+    }
+
     public void move2(Location newLocation) {
         newLocation.occupiedBy(rover);
         rover = null;

@@ -10,30 +10,30 @@ import java.awt.*;
 public class TetraStarSimulator {
     public SimulationUIMediator mediator;
 
-    public TetraStarSimulator(){
+    public TetraStarSimulator() {
         Tetra.instance.setTFace(new TRectangularFace(5, 8));
     }
 
-    public void start(){
+    public void start() {
         System.out.println("start");
     }
 
-    public void stop(){
+    public void stop() {
         System.out.println("stop");
     }
 
-    public void nextStep(){
+    public void nextStep() {
         System.out.println("nextStep");
     }
 
-    public void render(Graphics g, TetraUIDrawingPanel p){
+    public void render(Graphics g, TetraUIDrawingPanel p) {
         g.setColor(Color.BLACK);
-        g.fillRect(0,0,p.getWidth(), p.getHeight());
-        Tetra.instance.render(g,p);
+        g.fillRect(0, 0, p.getWidth(), p.getHeight());
+        Tetra.instance.render(g, p);
     }
 
     public void setMediator(SimulationUIMediator mediator) {
-        if(this.mediator == null) {
+        if (this.mediator == null) {
             this.mediator = mediator;
             mediator.setSimulation(this);
         }
@@ -43,7 +43,7 @@ public class TetraStarSimulator {
     ///// CLIENT
     ///////////////
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SimulationUIMediator mediator = new SimulationUIMediator();
 
         TetraUI ui = new TetraUI();
