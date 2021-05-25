@@ -25,7 +25,8 @@ public class TetraStarSimulator {
 
     public void nextStep() {
         TLogger.shared.log("nextStep");
-
+        Tetra.shared.nextStep();
+        mediator.updateRender();
     }
 
     public void render(Graphics g, TetraUIDrawingPanel p) {

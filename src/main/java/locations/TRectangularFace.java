@@ -12,7 +12,8 @@ public class TRectangularFace extends TFace {
     public int rows;
     public int cols;
 
-    private final ArrayList<ArrayList<Location>> cells;
+    private final ArrayList<ArrayList<Location>> cells = new ArrayList<>();
+    private final ArrayList<TRover> rovers = new ArrayList<>();
     private Location vaderBase;
 
     private final int[][] offsets = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -20,7 +21,6 @@ public class TRectangularFace extends TFace {
     public TRectangularFace(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        cells = new ArrayList<>();
 
         // initialize grid
         for (int row = 0; row < rows; row++) {
@@ -38,6 +38,13 @@ public class TRectangularFace extends TFace {
     public void testInitialize(){
         spawnHero();
         spawnVader();
+    }
+
+    @Override
+    public void nextStep() {
+        for(TRover rover: rovers){
+            rover.move();
+        }
     }
 
     @Override
@@ -59,6 +66,7 @@ public class TRectangularFace extends TFace {
         TRover tRover = new TRover("Rover " + TRover.count, Gender.male, this, location);
         location.occupiedBy(tRover);
 
+        rovers.add(tRover);
         return location;
     }
 
@@ -71,6 +79,7 @@ public class TRectangularFace extends TFace {
                 if (location.terrain.getType() == TerrainType.heroBase && location.isEmpty()) {
                     THero tHero = new THero("Hero " + THero.count, Gender.male, this, location);
                     location.occupiedBy(tHero);
+                    rovers.add(tHero);
                     return location;
                 }
             }
@@ -90,6 +99,7 @@ public class TRectangularFace extends TFace {
                 if (location.terrain.getType() == TerrainType.vaderBase && location.isEmpty()) {
                     TVader tVader = new TVader("Vader " + TVader.count, Gender.male, this, location);
                     location.occupiedBy(tVader);
+                    rovers.add(tVader);
                     return location;
                 }
             }

@@ -16,6 +16,10 @@ public class Tetra {
         this.tFace = tFace;
     }
 
+    public void nextStep(){
+        tFace.nextStep();
+    }
+
     public void render(Graphics g, TetraUIDrawingPanel p) {
         tFace.render(g, p);
     }

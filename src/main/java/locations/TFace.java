@@ -19,5 +19,7 @@ public abstract class TFace {
 
     public abstract void spawnHeroBase();
 
+    public abstract void nextStep();
+
     public abstract void render(Graphics g, TetraUIDrawingPanel p);
 }
