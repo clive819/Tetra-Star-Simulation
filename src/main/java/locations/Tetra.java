@@ -16,7 +16,7 @@ public class Tetra {
         this.tFace = tFace;
     }
 
-    public void nextStep(){
+    public void nextStep() {
         tFace.nextStep();
     }
 

@@ -17,6 +17,7 @@ public class TetraStarSimulator {
 
     public void start() {
         TLogger.shared.log("start");
+        setupSimulation();
     }
 
     public void stop() {
@@ -42,8 +43,8 @@ public class TetraStarSimulator {
         }
     }
 
-    public void setupSimulation(){
-
+    public void setupSimulation() {
+        // TODO
     }
 
     ///////////////

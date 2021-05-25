@@ -3,20 +3,24 @@ package main.java.starMap;
 import main.java.characters.THero;
 import main.java.logging.TLogger;
 
+import java.util.ArrayList;
+
 public class StarMapEncryptedHeader implements StarMapHeader {
 
     private final StarMapUnencryptedHeader header;
-    private final THero tHero;
+    private final ArrayList<THero> heros;
     public String encryptionDate;
     public int restorationCount;
     String symbol;
 
     public StarMapEncryptedHeader(StarMapUnencryptedHeader header, THero tHero, String date, String symbol) {
         this.header = header;
-        this.tHero = tHero;
+        this.heros = new ArrayList<>();
         this.encryptionDate = date;
         this.restorationCount = 0;
         this.symbol = symbol;
+
+        heros.add(tHero);
     }
 
     @Override
@@ -45,8 +49,9 @@ public class StarMapEncryptedHeader implements StarMapHeader {
         return true;
     }
 
-    public String getHeroID() {
-        return tHero.id;
+
+    public boolean hasAuthority(THero tHero) {
+        return heros.contains(tHero);
     }
 
 }

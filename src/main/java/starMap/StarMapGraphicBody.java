@@ -10,4 +10,9 @@ public class StarMapGraphicBody implements StarMapBody {
     public void decrypt() {
 
     }
+
+    @Override
+    public void display() {
+
+    }
 }

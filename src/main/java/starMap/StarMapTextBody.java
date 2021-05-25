@@ -1,5 +1,7 @@
 package main.java.starMap;
 
+import main.java.logging.TLogger;
+
 public class StarMapTextBody implements StarMapBody {
 
     String direction;
@@ -16,5 +18,10 @@ public class StarMapTextBody implements StarMapBody {
     @Override
     public void decrypt() {
         direction = new StringBuilder(direction).reverse().toString();
+    }
+
+    @Override
+    public void display() {
+        TLogger.shared.log("Content: " + direction);
     }
 }

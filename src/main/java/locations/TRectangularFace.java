@@ -35,21 +35,21 @@ public class TRectangularFace extends TFace {
         testInitialize();
     }
 
-    public void testInitialize(){
+    public void testInitialize() {
         spawnHero();
         spawnVader();
     }
 
     @Override
     public void nextStep() {
-        for(TRover rover: rovers){
-            rover.move();
+        for (TRover rover : rovers) {
+            rover.update();
         }
     }
 
     @Override
-    public Location getAdjacent(Location currentLocation, boolean heroBaseAllowed) {
-        ArrayList<Location> dummyArray = getNeighbors(currentLocation, heroBaseAllowed);
+    public Location getAdjacent(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier) {
+        ArrayList<Location> dummyArray = getNeighbors(currentLocation, heroBaseAllowed, hasTFlier);
         return dummyArray.get(new Random().nextInt(dummyArray.size()));
     }
 
@@ -64,7 +64,7 @@ public class TRectangularFace extends TFace {
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
 
         TRover tRover = new TRover("Rover " + TRover.count, Gender.male, this, location);
-        location.occupiedBy(tRover);
+        location.enter(tRover);
 
         rovers.add(tRover);
         return location;
@@ -78,7 +78,7 @@ public class TRectangularFace extends TFace {
 
                 if (location.terrain.getType() == TerrainType.heroBase && location.isEmpty()) {
                     THero tHero = new THero("Hero " + THero.count, Gender.male, this, location);
-                    location.occupiedBy(tHero);
+                    location.enter(tHero);
                     rovers.add(tHero);
                     return location;
                 }
@@ -98,7 +98,7 @@ public class TRectangularFace extends TFace {
 
                 if (location.terrain.getType() == TerrainType.vaderBase && location.isEmpty()) {
                     TVader tVader = new TVader("Vader " + TVader.count, Gender.male, this, location);
-                    location.occupiedBy(tVader);
+                    location.enter(tVader);
                     rovers.add(tVader);
                     return location;
                 }
@@ -114,14 +114,14 @@ public class TRectangularFace extends TFace {
     public void spawnVaderBase() {
         int[] coordinate = getRandomEmptyNonEdgeCoordinate();
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
-        ArrayList<Location> neighbors = getNeighbors(location, false);
+        ArrayList<Location> neighbors = getNeighbors(location, false, true);
 
         if (neighbors.size() < 4) {
             spawnVaderBase();
         } else {
             location.setTerrain(new TVaderBase());
             vaderBase = location;
-            for(Location l: neighbors){
+            for (Location l : neighbors) {
                 l.setTerrain(new River());
             }
         }
@@ -177,7 +177,7 @@ public class TRectangularFace extends TFace {
         return row == 0 || row == (rows - 1) || col == 0 || col == (cols - 1);
     }
 
-    private ArrayList<Location> getNeighbors(Location currentLocation, boolean heroBaseAllowed) {
+    private ArrayList<Location> getNeighbors(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier) {
         ArrayList<Location> dummyArray = new ArrayList<>();
 
         for (int[] offset : offsets) {
@@ -186,7 +186,8 @@ public class TRectangularFace extends TFace {
 
             if (row > -1 && row < rows && col > -1 && col < cols) {
                 Location location = cells.get(row).get(col);
-                if (location.terrain.getType() == TerrainType.heroBase && !heroBaseAllowed) {
+                TerrainType type = location.terrain.getType();
+                if ((type == TerrainType.heroBase && !heroBaseAllowed) || (type == TerrainType.river && !hasTFlier)) {
                     continue;
                 }
                 dummyArray.add(location);
@@ -197,8 +198,8 @@ public class TRectangularFace extends TFace {
     }
 
     public void render(Graphics g, TetraUIDrawingPanel p) {
-        for(ArrayList<Location> list: cells){
-            for(Location l: list){
+        for (ArrayList<Location> list : cells) {
+            for (Location l : list) {
                 l.render(g, p, this);
             }
         }

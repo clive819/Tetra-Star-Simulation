@@ -5,9 +5,9 @@ import main.java.logging.TLogger;
 
 public class StarMap {
 
-    String id;
-    StarMapHeader header;
-    StarMapBody body;
+    public String id;
+    public StarMapHeader header;
+    public StarMapBody body;
 
     public StarMap(String id, StarMapHeader header, StarMapBody body) {
         this.id = id;
@@ -27,7 +27,7 @@ public class StarMap {
         if (header.isEncrypted()) {
             StarMapEncryptedHeader encryptedHeader = (StarMapEncryptedHeader) header;
 
-            if (encryptedHeader.getHeroID().equals(tHero.id)) {
+            if (encryptedHeader.hasAuthority(tHero)) {
                 header = header.decrypted(tHero);
                 body.decrypt();
                 TLogger.shared.log(this + " decrypted successfully");
@@ -36,6 +36,10 @@ public class StarMap {
                         + " that wasn't encrypted by him.");
             }
         }
+    }
+
+    public void display() {
+        body.display();
     }
 
     @Override

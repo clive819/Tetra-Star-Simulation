@@ -3,8 +3,11 @@ package main.java.characters;
 import main.java.locations.Location;
 import main.java.locations.TFace;
 import main.java.logging.TLogger;
+import main.java.stateMachine.MoveCommand;
+import main.java.stateMachine.NoMoreMovesCommand;
+import main.java.stateMachine.StateMachine;
 
-public class THero extends TRover implements TFlierOperations {
+public class THero extends TRover implements StateMachine {
 
     TFlier tFlier;
     Location base;
@@ -16,33 +19,53 @@ public class THero extends TRover implements TFlierOperations {
 
 
     @Override
-    public void move() {
-        Location nextLocation = tFace.getAdjacent(currentLocation, true);
+    public void randomMove() {
+        Location nextLocation = tFace.getAdjacent(currentLocation, true, tFlier != null);
 
         if (nextLocation != null) {
-            TLogger.shared.log(this + " moved from " + currentLocation + " to " + nextLocation);
-            currentLocation.move2(nextLocation);
-            currentLocation = nextLocation;
+            queue.add(new MoveCommand(this, currentLocation, nextLocation));
         } else {
-            TLogger.shared.log(this + " cannot make a move anymore");
+            queue.add(new NoMoreMovesCommand(this));
         }
     }
 
     @Override
-    public void fly2(Location location) {
+    public void setCurrentLocation(Location location) {
+        super.setCurrentLocation(location);
 
+        if (location.isMapBase()) {
+            if (location.isEmpty()) {
+                requestTFlier();
+                queue.add(new MoveCommand(this, currentLocation, tFace.getVaderBase()));
+            } else {
+                enterMapBase(location);
+            }
+        } else if (location.isVaderBase()) {
+            // TODO
+        }
     }
 
-    public boolean isHero(){
+    private void enterMapBase(Location location) {
+        // TODO
+    }
+
+    private void requestTFlier() {
+        if (tFlier == null) {
+            TLogger.shared.log(this + " request for a TFlier");
+            tFlier = new TFlier();
+        }
+    }
+
+    public boolean isHero() {
         return true;
     }
 
     private void encrypt() {
-
+        // TODO
     }
 
     private void decrypt() {
-
+        // TODO
     }
 
     @Override
