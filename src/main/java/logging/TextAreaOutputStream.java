@@ -17,7 +17,7 @@ class TextAreaOutputStream extends OutputStream {
 
     @Override
     public void flush() throws IOException {
-        textArea.append(buffer.toString(StandardCharsets.UTF_8));
+        textArea.append(buffer.toString());//StandardCharsets.UTF_8)); //I Chang: took this out for now to test other stuff as my compiler was not recognizing it as a proper argument
         buffer.reset();
     }
 

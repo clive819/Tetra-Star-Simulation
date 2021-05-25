@@ -43,13 +43,14 @@ public class TetraUI {
 
             // place text panel
             textPanel = new JTextArea("");
+            JScrollPane scrollPane = new JScrollPane(textPanel);
             c.fill = GridBagConstraints.BOTH;
             c.insets = new Insets(10, 10, 10, 10); //padding: all
             c.weightx = 3;
             c.weighty = 2;
             c.gridx = 0;
             c.gridy = 1;
-            container.add(textPanel, c);
+            container.add(scrollPane, c);
 
             // place buttons panel
             buttonsPanel = new TetraUIButtonsPanel();
