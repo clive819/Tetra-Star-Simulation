@@ -1,5 +1,6 @@
 package main.java.locations;
 
+import main.java.characters.Colors;
 import main.java.characters.TRover;
 import main.java.ui.TetraUIDrawingPanel;
 
@@ -46,19 +47,19 @@ public class Location {
     private void renderTerrain(Graphics g, TetraUIDrawingPanel p, TRectangularFace f){
         switch(this.terrain.getType()){
             case river:
-                g.setColor(new Color(49, 160, 228, 255));
+                g.setColor(Colors.Terrain.river);
                 break;
             case ground:
-                g.setColor(new Color(228, 195, 167, 255));
+                g.setColor(Colors.Terrain.ground);
                 break;
             case heroBase:
-                g.setColor(new Color(52, 109, 107, 255));
+                g.setColor(Colors.Terrain.heroBase);
                 break;
             case vaderBase:
-                g.setColor(new Color(115, 56, 59, 255));
+                g.setColor(Colors.Terrain.vaderBase);
                 break;
             default:
-                g.setColor(new Color(171, 172, 168, 255));
+                g.setColor(Colors.Terrain.defaultColor);
         }
 
         int finalXPadding = p.xScale(RENDER_PADDING);
@@ -75,11 +76,11 @@ public class Location {
     private void renderRover(Graphics g, TetraUIDrawingPanel p, TRectangularFace f){
         if(this.rover != null){
             if(this.rover.isHero()){
-                g.setColor(new Color(12, 200, 185, 255));
+                g.setColor(Colors.Rover.hero);
             }else if(this.rover.isVader()){
-                g.setColor(new Color(173, 0, 5, 255));
+                g.setColor(Colors.Rover.vader);
             }else{
-                g.setColor(new Color(175, 176, 175, 255));
+                g.setColor(Colors.Rover.rover);
             }
 
             int widthPerCell = p.WIDTH / f.cols;
