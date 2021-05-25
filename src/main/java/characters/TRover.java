@@ -35,6 +35,14 @@ public class TRover {
         }
     }
 
+    public boolean isHero(){
+        return false;
+    }
+
+    public boolean isVader(){
+        return false;
+    }
+
     @Override
     public String toString() {
         return "TRover{" +

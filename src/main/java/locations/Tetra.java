@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Tetra {
 
-    public static Tetra instance = new Tetra();
+    public static Tetra shared = new Tetra();
     public TFace tFace;
 
     private Tetra() {

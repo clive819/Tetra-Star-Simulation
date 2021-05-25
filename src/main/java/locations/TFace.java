@@ -5,7 +5,6 @@ import main.java.ui.TetraUIDrawingPanel;
 import java.awt.*;
 
 public abstract class TFace {
-
     public abstract Location getAdjacent(Location currentLocation, boolean heroBaseAllowed);
 
     public abstract Location getVaderBase();

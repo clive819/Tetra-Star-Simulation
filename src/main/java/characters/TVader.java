@@ -17,6 +17,10 @@ public class TVader extends TRover implements TFlierOperations {
 
     }
 
+    public boolean isVader(){
+        return true;
+    }
+
     @Override
     public String toString() {
         return "TVader{" +

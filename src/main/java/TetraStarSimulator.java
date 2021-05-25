@@ -12,7 +12,7 @@ public class TetraStarSimulator {
     public SimulationUIMediator mediator;
 
     public TetraStarSimulator() {
-        Tetra.instance.setTFace(new TRectangularFace(5, 8));
+        Tetra.shared.setTFace(new TRectangularFace(5, 8));
     }
 
     public void start() {
@@ -25,12 +25,13 @@ public class TetraStarSimulator {
 
     public void nextStep() {
         TLogger.shared.log("nextStep");
+
     }
 
     public void render(Graphics g, TetraUIDrawingPanel p) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, p.getWidth(), p.getHeight());
-        Tetra.instance.render(g, p);
+        Tetra.shared.render(g, p);
     }
 
     public void setMediator(SimulationUIMediator mediator) {
@@ -38,6 +39,10 @@ public class TetraStarSimulator {
             this.mediator = mediator;
             mediator.setSimulation(this);
         }
+    }
+
+    public void setupSimulation(){
+
     }
 
     ///////////////

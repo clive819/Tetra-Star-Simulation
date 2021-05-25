@@ -33,6 +33,10 @@ public class THero extends TRover implements TFlierOperations {
 
     }
 
+    public boolean isHero(){
+        return true;
+    }
+
     private void encrypt() {
 
     }

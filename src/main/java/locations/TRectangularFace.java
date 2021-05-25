@@ -15,7 +15,6 @@ public class TRectangularFace extends TFace {
     private final ArrayList<ArrayList<Location>> cells;
     private Location vaderBase;
 
-    private final int CELL_RENDER_PADDING = 20;
     private final int[][] offsets = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
     public TRectangularFace(int rows, int cols) {
@@ -32,6 +31,13 @@ public class TRectangularFace extends TFace {
             }
             cells.add(dummyArray);
         }
+
+        testInitialize();
+    }
+
+    public void testInitialize(){
+        spawnHero();
+        spawnVader();
     }
 
     @Override
@@ -105,6 +111,9 @@ public class TRectangularFace extends TFace {
         } else {
             location.setTerrain(new TVaderBase());
             vaderBase = location;
+            for(Location l: neighbors){
+                l.setTerrain(new River());
+            }
         }
     }
 
@@ -178,26 +187,10 @@ public class TRectangularFace extends TFace {
     }
 
     public void render(Graphics g, TetraUIDrawingPanel p) {
-        for (int x = 0; x < cols; x++) {
-            for (int y = 0; y < rows; y++) {
-                renderCell(g, p, x, y);
+        for(ArrayList<Location> list: cells){
+            for(Location l: list){
+                l.render(g, p, this);
             }
         }
-    }
-
-    public void renderCell(Graphics g, TetraUIDrawingPanel p, int x, int y) {
-        g.setColor(new Color(228, 195, 167, 255));
-        int finalXPadding = p.xScale(CELL_RENDER_PADDING);
-        int finalYPadding = p.yScale(CELL_RENDER_PADDING);
-        int widthPerCell = p.WIDTH / cols;
-        int heightPerCell = p.HEIGHT / rows;
-        int finalX = p.xScale(x * widthPerCell + finalXPadding);
-        int finalY = p.yScale(y * heightPerCell + finalYPadding);
-        int finalWidth = p.xScale(widthPerCell - finalXPadding * 2);
-        int finalHeight = p.yScale(heightPerCell - finalYPadding * 2);
-        g.fillRect(finalX, finalY, finalWidth, finalHeight);
-
-        // display something based on the content of the location
-//        Location location = cells.get(y).get(x);
     }
 }
