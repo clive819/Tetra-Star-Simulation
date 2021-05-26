@@ -61,7 +61,7 @@ public class StarAtlasHeader implements StarMapHeader {
 
     @Override
     public void display() {
-        for (StarMap map: maps) {
+        for (StarMap map : maps) {
             map.display();
         }
     }

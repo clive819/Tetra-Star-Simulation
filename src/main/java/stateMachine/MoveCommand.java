@@ -30,7 +30,7 @@ public class MoveCommand implements Command {
                 TLogger.shared.log(tRover + " stalled for 1 round");
                 tRover.delayExecute(this);
                 stallCount += 1;
-            }else {
+            } else {
                 TLogger.shared.log(this + " is discard since it was not able to be executed for 3 rounds)");
             }
         }

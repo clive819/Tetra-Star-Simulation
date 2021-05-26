@@ -1,6 +1,9 @@
 package main.java.locations;
 
-import main.java.characters.*;
+import main.java.characters.Gender;
+import main.java.characters.THero;
+import main.java.characters.TRover;
+import main.java.characters.TVader;
 import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;

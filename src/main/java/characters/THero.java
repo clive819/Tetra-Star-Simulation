@@ -54,7 +54,7 @@ public class THero extends TRover implements StateMachine {
             if (starMap.header.isEncrypted()) {
                 if (starMap.header.hasAuthority(this)) {
                     starMap.decrypt(this);
-                }else {
+                } else {
                     starMap.header.authorize(this);
                 }
             }

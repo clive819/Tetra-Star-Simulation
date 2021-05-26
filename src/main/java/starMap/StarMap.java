@@ -41,7 +41,7 @@ public class StarMap {
     public void display() {
         if (header.getNumberOfItems() > 1) {
             header.display();
-        }else {
+        } else {
             body.display();
         }
     }
