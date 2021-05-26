@@ -22,4 +22,6 @@ public abstract class TFace {
     public abstract void nextStep();
 
     public abstract void render(Graphics g, TetraUIDrawingPanel p);
+
+    public abstract void reset();
 }

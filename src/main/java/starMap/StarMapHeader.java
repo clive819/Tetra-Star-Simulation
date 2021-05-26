@@ -14,4 +14,12 @@ public interface StarMapHeader {
 
     boolean isEncrypted();
 
+    boolean hasAuthority(THero tHero);
+
+    void authorize(THero tHero);
+
+    void display();
+
+    void addStarMap(StarMap map);
+
 }

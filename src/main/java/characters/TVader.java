@@ -38,11 +38,16 @@ public class TVader extends TRover implements StateMachine {
     public void setCurrentLocation(Location location) {
         super.setCurrentLocation(location);
 
-
+        // TODO
     }
 
     public boolean isVader() {
         return true;
+    }
+
+    private void backtrace() {
+        queue = history;
+        history.clear();
     }
 
     @Override

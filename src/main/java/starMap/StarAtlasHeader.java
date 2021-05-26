@@ -49,6 +49,24 @@ public class StarAtlasHeader implements StarMapHeader {
         return false;
     }
 
+    @Override
+    public boolean hasAuthority(THero tHero) {
+        return false;
+    }
+
+    @Override
+    public void authorize(THero tHero) {
+
+    }
+
+    @Override
+    public void display() {
+        for (StarMap map: maps) {
+            map.display();
+        }
+    }
+
+    @Override
     public void addStarMap(StarMap map) {
         maps.add(map);
     }

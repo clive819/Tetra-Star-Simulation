@@ -1,5 +1,9 @@
 package main.java.locations;
 
-public interface Terrain {
-    TerrainType getType();
+public enum Terrain {
+    heroBase,
+    vaderBase,
+    mapBase,
+    river,
+    ground
 }

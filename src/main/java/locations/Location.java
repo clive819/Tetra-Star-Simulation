@@ -2,6 +2,7 @@ package main.java.locations;
 
 import main.java.characters.Colors;
 import main.java.characters.TRover;
+import main.java.starMap.StarMap;
 import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
@@ -10,9 +11,12 @@ public class Location {
 
     int row;
     int col;
-    TRover rover;
-    Terrain terrain;
+
+    public TRover rover;
+    public Terrain terrain;
     public String id;
+    public StarMap starMap;
+
     private final int RENDER_PADDING = 20;
 
     public Location(Terrain terrain, int row, int col, String id) {
@@ -20,6 +24,7 @@ public class Location {
         this.col = col;
         this.terrain = terrain;
         this.id = id;
+        starMap = null;
     }
 
     public boolean isEmpty() {
@@ -40,21 +45,13 @@ public class Location {
         this.terrain = terrain;
     }
 
-    public boolean isMapBase() {
-        return terrain.getType() == TerrainType.mapBase;
-    }
-
-    public boolean isVaderBase() {
-        return terrain.getType() == TerrainType.vaderBase;
-    }
-
     public void render(Graphics g, TetraUIDrawingPanel p, TRectangularFace f) {
         renderTerrain(g, p, f);
         renderRover(g, p, f);
     }
 
     private void renderTerrain(Graphics g, TetraUIDrawingPanel p, TRectangularFace f) {
-        switch (this.terrain.getType()) {
+        switch (this.terrain) {
             case river:
                 g.setColor(Colors.Terrain.river);
                 break;
@@ -109,7 +106,6 @@ public class Location {
         return "Location{" +
                 "row=" + row +
                 ", col=" + col +
-                ", terrain=" + terrain +
                 '}';
     }
 }

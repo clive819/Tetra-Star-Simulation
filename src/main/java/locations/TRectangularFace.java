@@ -12,8 +12,8 @@ public class TRectangularFace extends TFace {
     public int rows;
     public int cols;
 
-    private final ArrayList<ArrayList<Location>> cells = new ArrayList<>();
-    private final ArrayList<TRover> rovers = new ArrayList<>();
+    private ArrayList<ArrayList<Location>> cells;
+    private ArrayList<TRover> rovers;
     private Location vaderBase;
 
     private final int[][] offsets = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -22,22 +22,25 @@ public class TRectangularFace extends TFace {
         this.rows = rows;
         this.cols = cols;
 
-        // initialize grid
+        reset();
+    }
+
+    private void initialize() {
         for (int row = 0; row < rows; row++) {
             ArrayList<Location> dummyArray = new ArrayList<>();
             for (int col = 0; col < cols; col++) {
-                Location location = new Location(new Ground(), row, col, "Location" + "(" + row + ", " + col + ")");
+                Location location = new Location(Terrain.ground, row, col, "Location" + "(" + row + ", " + col + ")");
                 dummyArray.add(location);
             }
             cells.add(dummyArray);
         }
-
-        testInitialize();
     }
 
-    public void testInitialize() {
-        spawnHero();
-        spawnVader();
+    @Override
+    public void reset() {
+        cells = new ArrayList<>();
+        rovers = new ArrayList<>();
+        initialize();
     }
 
     @Override
@@ -76,7 +79,7 @@ public class TRectangularFace extends TFace {
             for (int col = 0; col < cols; col++) {
                 Location location = cells.get(row).get(col);
 
-                if (location.terrain.getType() == TerrainType.heroBase && location.isEmpty()) {
+                if (location.terrain == Terrain.heroBase && location.isEmpty()) {
                     THero tHero = new THero("Hero " + THero.count, Gender.male, this, location);
                     location.enter(tHero);
                     rovers.add(tHero);
@@ -96,7 +99,7 @@ public class TRectangularFace extends TFace {
             for (int col = 0; col < cols; col++) {
                 Location location = cells.get(row).get(col);
 
-                if (location.terrain.getType() == TerrainType.vaderBase && location.isEmpty()) {
+                if (location.terrain == Terrain.vaderBase && location.isEmpty()) {
                     TVader tVader = new TVader("Vader " + TVader.count, Gender.male, this, location);
                     location.enter(tVader);
                     rovers.add(tVader);
@@ -119,10 +122,10 @@ public class TRectangularFace extends TFace {
         if (neighbors.size() < 4) {
             spawnVaderBase();
         } else {
-            location.setTerrain(new TVaderBase());
+            location.setTerrain(Terrain.vaderBase);
             vaderBase = location;
             for (Location l : neighbors) {
-                l.setTerrain(new River());
+                l.setTerrain(Terrain.river);
             }
         }
     }
@@ -131,7 +134,7 @@ public class TRectangularFace extends TFace {
     public void spawnHeroBase() {
         int[] coordinate = getRandomEmptyEdgeCoordinate();
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
-        location.setTerrain(new THeroBase());
+        location.setTerrain(Terrain.heroBase);
     }
 
     private int[] getRandomEmptyCoordinate() {
@@ -186,8 +189,7 @@ public class TRectangularFace extends TFace {
 
             if (row > -1 && row < rows && col > -1 && col < cols) {
                 Location location = cells.get(row).get(col);
-                TerrainType type = location.terrain.getType();
-                if ((type == TerrainType.heroBase && !heroBaseAllowed) || (type == TerrainType.river && !hasTFlier)) {
+                if ((location.terrain == Terrain.heroBase && !heroBaseAllowed) || (location.terrain == Terrain.river && !hasTFlier)) {
                     continue;
                 }
                 dummyArray.add(location);

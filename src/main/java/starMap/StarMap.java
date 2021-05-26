@@ -39,7 +39,11 @@ public class StarMap {
     }
 
     public void display() {
-        body.display();
+        if (header.getNumberOfItems() > 1) {
+            header.display();
+        }else {
+            body.display();
+        }
     }
 
     @Override

@@ -18,10 +18,13 @@ public class TetraStarSimulator {
     public void start() {
         TLogger.shared.log("start");
         setupSimulation();
+        mediator.updateRender();
     }
 
     public void stop() {
         TLogger.shared.log("stop");
+        Tetra.shared.tFace.reset();
+        mediator.updateRender();
     }
 
     public void nextStep() {
@@ -44,6 +47,8 @@ public class TetraStarSimulator {
     }
 
     public void setupSimulation() {
+        Tetra.shared.tFace.spawnHero();
+        Tetra.shared.tFace.spawnVader();
         // TODO
     }
 
