@@ -3,8 +3,8 @@ package main.java.characters;
 import main.java.locations.Location;
 import main.java.locations.TFace;
 import main.java.locations.Terrain;
-import main.java.logging.TLogger;
 import main.java.starMap.StarMap;
+import main.java.stateMachine.AcquireTFlierCommand;
 import main.java.stateMachine.MoveCommand;
 import main.java.stateMachine.NoMoreMovesCommand;
 import main.java.stateMachine.StateMachine;
@@ -73,9 +73,12 @@ public class THero extends TRover implements StateMachine {
 
     private void requestTFlier() {
         if (tFlier == null) {
-            TLogger.shared.log(this + " request for a TFlier");
-            tFlier = new TFlier();
+            queue.add(new AcquireTFlierCommand(this));
         }
+    }
+
+    public void setTFlier(TFlier tFlier) {
+        this.tFlier = tFlier;
     }
 
     public boolean isHero() {
