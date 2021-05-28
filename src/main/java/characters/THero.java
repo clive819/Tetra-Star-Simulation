@@ -74,15 +74,17 @@ public class THero extends TRover implements StateMachine {
     private void enterVaderBase(Location location) {
         if (AbstractStarMap.ping(location.id)) {
             try {
-                AbstractStarMap clone = location.starMap.clone();
+                starMap = location.starMap.clone();
 
-                if (clone.isEncrypted()) {
-                    if (clone.hasAuthority(this)) {
-                        clone.restorationCount += 1;
+                if (starMap.isEncrypted()) {
+                    if (starMap.hasAuthority(this)) {
+                        starMap.restorationCount += 1;
                     }else {
-                        clone.authorize(this);
+                        starMap.authorize(this);
                     }
                 }
+
+                queue.add(new MoveCommand(this, location, base));
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
                 TLogger.shared.log(e.toString());
