@@ -3,7 +3,8 @@ package main.java.characters;
 import main.java.locations.Location;
 import main.java.locations.TFace;
 import main.java.locations.Terrain;
-import main.java.starMap.StarMap;
+import main.java.logging.TLogger;
+import main.java.starMap.AbstractStarMap;
 import main.java.stateMachine.AcquireTFlierCommand;
 import main.java.stateMachine.MoveCommand;
 import main.java.stateMachine.NoMoreMovesCommand;
@@ -12,11 +13,16 @@ import main.java.stateMachine.StateMachine;
 public class THero extends TRover implements StateMachine {
 
     TFlier tFlier;
-    Location base;
+
+    private AbstractStarMap starMap;
+
+    private final Location base;
+
 
     public THero(String id, Gender gender, TFace tFace, Location location) {
         super(id, gender, tFace, location);
-        this.base = location;
+        base = location;
+        starMap = null;
     }
 
 
@@ -44,18 +50,21 @@ public class THero extends TRover implements StateMachine {
             }
         } else if (location.terrain == Terrain.vaderBase) {
             enterVaderBase(location);
+        } else if (location == base) {
+            base.store(starMap);
+            starMap = null;
         }
     }
 
     private void enterMapBase(Location location) {
-        StarMap starMap = location.starMap;
+        AbstractStarMap starMap = location.starMap;
 
         if (starMap != null) {
-            if (starMap.header.isEncrypted()) {
-                if (starMap.header.hasAuthority(this)) {
+            if (starMap.isEncrypted()) {
+                if (starMap.hasAuthority(this)) {
                     starMap.decrypt(this);
                 } else {
-                    starMap.header.authorize(this);
+                    starMap.authorize(this);
                 }
             }
             starMap.display();
@@ -63,12 +72,22 @@ public class THero extends TRover implements StateMachine {
     }
 
     private void enterVaderBase(Location location) {
-//        At TVaderBase, checks if the particular StarMap is there, by sending it a signal.
-//        If it is found, makes a clone of it, encrypts the original, stores it back in its base and flies to his homebase with the clone.
-//          i. If he finds that the StarMap was already encrypted when it was stolen: if it was encrypted by him previously, simply increments the restoration_counter.
-//          ii. If it was encrypted by another THero, adds his ID to the header.
+        if (AbstractStarMap.ping(location.id)) {
+            try {
+                AbstractStarMap clone = location.starMap.clone();
 
-        // TODO
+                if (clone.isEncrypted()) {
+                    if (clone.hasAuthority(this)) {
+                        clone.restorationCount += 1;
+                    }else {
+                        clone.authorize(this);
+                    }
+                }
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+                TLogger.shared.log(e.toString());
+            }
+        }
     }
 
     private void requestTFlier() {

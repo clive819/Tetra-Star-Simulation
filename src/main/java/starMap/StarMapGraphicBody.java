@@ -2,7 +2,7 @@ package main.java.starMap;
 
 public class StarMapGraphicBody implements StarMapBody {
     @Override
-    public void encrypt() {
+    public void encrypt(String symbol) {
 
     }
 

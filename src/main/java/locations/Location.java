@@ -2,7 +2,7 @@ package main.java.locations;
 
 import main.java.characters.Colors;
 import main.java.characters.TRover;
-import main.java.starMap.StarMap;
+import main.java.starMap.AbstractStarMap;
 import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
@@ -15,7 +15,7 @@ public class Location {
     public TRover rover;
     public Terrain terrain;
     public String id;
-    public StarMap starMap;
+    public AbstractStarMap starMap;
 
     private final int RENDER_PADDING = 20;
 
@@ -43,6 +43,18 @@ public class Location {
 
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
+    }
+
+    public void store(AbstractStarMap starMap) {
+        if (starMap == null) {
+            return;
+        }
+
+        if (this.starMap == null) {
+            this.starMap = starMap;
+        } else {
+            this.starMap.add(starMap);
+        }
     }
 
     public void render(Graphics g, TetraUIDrawingPanel p, TRectangularFace f) {

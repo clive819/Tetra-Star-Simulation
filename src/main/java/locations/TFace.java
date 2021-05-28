@@ -9,11 +9,13 @@ public abstract class TFace {
 
     public abstract Location getVaderBase();
 
-    public abstract Location spawnRover();
+    public abstract void spawnRover();
 
-    public abstract Location spawnHero();
+    public abstract void spawnHero();
 
-    public abstract Location spawnVader();
+    public abstract void spawnVader();
+
+    public abstract void spawnMapBase();
 
     public abstract void spawnVaderBase();
 

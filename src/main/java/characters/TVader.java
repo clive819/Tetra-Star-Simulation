@@ -2,6 +2,9 @@ package main.java.characters;
 
 import main.java.locations.Location;
 import main.java.locations.TFace;
+import main.java.locations.Terrain;
+import main.java.logging.TLogger;
+import main.java.starMap.AbstractStarMap;
 import main.java.stateMachine.Command;
 import main.java.stateMachine.MoveCommand;
 import main.java.stateMachine.NoMoreMovesCommand;
@@ -12,12 +15,17 @@ import java.util.ArrayList;
 public class TVader extends TRover implements StateMachine {
 
     TFlier tFlier;
-    private final ArrayList<Command> history;
+
+    private AbstractStarMap starMap;
+
+    private ArrayList<Command> history;
+
 
     public TVader(String id, Gender gender, TFace tFace, Location location) {
         super(id, gender, tFace, location);
         history = new ArrayList<>();
         tFlier = new TFlier();
+        starMap = null;
     }
 
 
@@ -38,7 +46,23 @@ public class TVader extends TRover implements StateMachine {
     public void setCurrentLocation(Location location) {
         super.setCurrentLocation(location);
 
-        // TODO
+        if (location.terrain == Terrain.mapBase) {
+            stealStarMap(location);
+
+        }else if (location.terrain == Terrain.vaderBase) {
+            location.store(starMap);
+            starMap = null;
+        }
+    }
+
+    private void stealStarMap(Location location) {
+        starMap = location.starMap;
+
+        if (starMap != null) {
+            TLogger.shared.log(this + " steals " + starMap);
+            location.starMap = null;
+            backtrace();
+        }
     }
 
     public boolean isVader() {
@@ -46,7 +70,7 @@ public class TVader extends TRover implements StateMachine {
     }
 
     private void backtrace() {
-        queue = history;
+        queue = (ArrayList<Command>) history.clone();
         history.clear();
     }
 

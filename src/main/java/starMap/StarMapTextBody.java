@@ -4,20 +4,24 @@ import main.java.logging.TLogger;
 
 public class StarMapTextBody implements StarMapBody {
 
-    String direction;
+    private String direction;
+    private String symbol;
 
     public StarMapTextBody(String direction) {
         this.direction = direction;
+        symbol = "";
     }
 
     @Override
-    public void encrypt() {
+    public void encrypt(String symbol) {
         direction = new StringBuilder(direction).reverse().toString();
+        this.symbol = symbol;
     }
 
     @Override
     public void decrypt() {
         direction = new StringBuilder(direction).reverse().toString();
+        TLogger.shared.log("Symbol: " + symbol);
     }
 
     @Override

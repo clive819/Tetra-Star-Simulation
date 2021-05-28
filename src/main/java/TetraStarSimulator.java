@@ -49,6 +49,8 @@ public class TetraStarSimulator {
     public void setupSimulation() {
         Tetra.shared.tFace.spawnHero();
         Tetra.shared.tFace.spawnVader();
+        Tetra.shared.tFace.spawnRover();
+        Tetra.shared.tFace.spawnMapBase();
         // TODO
     }
 

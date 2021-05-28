@@ -4,6 +4,9 @@ import main.java.characters.Gender;
 import main.java.characters.THero;
 import main.java.characters.TRover;
 import main.java.characters.TVader;
+import main.java.starMap.StarMap;
+import main.java.starMap.StarMapBody;
+import main.java.starMap.StarMapTextBody;
 import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
@@ -65,7 +68,7 @@ public class TRectangularFace extends TFace {
     }
 
     @Override
-    public Location spawnRover() {
+    public void spawnRover() {
         int[] coordinate = getRandomEmptyCoordinate();
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
 
@@ -73,11 +76,10 @@ public class TRectangularFace extends TFace {
         location.enter(tRover);
 
         rovers.add(tRover);
-        return location;
     }
 
     @Override
-    public Location spawnHero() {
+    public void spawnHero() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 Location location = cells.get(row).get(col);
@@ -86,18 +88,18 @@ public class TRectangularFace extends TFace {
                     THero tHero = new THero("Hero " + THero.count, Gender.male, this, location);
                     location.enter(tHero);
                     rovers.add(tHero);
-                    return location;
+                    return;
                 }
             }
         }
 
         // if no HeroBase exist
         spawnHeroBase();
-        return spawnHero();
+        spawnHero();
     }
 
     @Override
-    public Location spawnVader() {
+    public void spawnVader() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 Location location = cells.get(row).get(col);
@@ -106,14 +108,27 @@ public class TRectangularFace extends TFace {
                     TVader tVader = new TVader("Vader " + TVader.count, Gender.male, this, location);
                     location.enter(tVader);
                     rovers.add(tVader);
-                    return location;
+                    return;
                 }
             }
         }
 
         // if no VaderBase exist
         spawnVaderBase();
-        return spawnVader();
+        spawnVader();
+    }
+
+    @Override
+    public void spawnMapBase() {
+        int[] coordinate = getRandomEmptyCoordinate();
+        Location location = cells.get(coordinate[0]).get(coordinate[1]);
+
+        StarMap starMap = new StarMap("StarMap " + StarMap.count, location.id);
+        StarMapBody starMapBody = new StarMapTextBody("Directions to Planet Earth from Tetra");
+
+        starMap.setBody(starMapBody);
+        location.setTerrain(Terrain.mapBase);
+        location.store(starMap);
     }
 
     @Override
