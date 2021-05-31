@@ -45,7 +45,7 @@ public class TRover implements StateMachine {
         queue.add(0, command);
     }
 
-    public void fullStall(Command command){
+    public void fullStall(Command command) {
         //no behavior on TRover currently
         //currently used to allow TVader to break backtrace
     }
