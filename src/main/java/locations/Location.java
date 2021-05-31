@@ -57,7 +57,7 @@ public class Location {
         if (this.starMap == null) {
             this.starMap = starMap;
         } else {
-            this.starMap.add(starMap);
+            this.starMap = this.starMap.add(starMap);
         }
         starMap.setLocation(this);
     }
