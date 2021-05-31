@@ -17,6 +17,7 @@ public class TVader extends TRover implements StateMachine {
     TFlier tFlier;
 
     private AbstractStarMap starMap;
+    private Location baseLocation;
 
     private ArrayList<Command> history;
 
@@ -26,6 +27,7 @@ public class TVader extends TRover implements StateMachine {
         history = new ArrayList<>();
         tFlier = new TFlier();
         starMap = null;
+        baseLocation = location; //assumption: vader always spawns in base
     }
 
 
@@ -61,7 +63,7 @@ public class TVader extends TRover implements StateMachine {
         if (starMap != null) {
             TLogger.shared.log(this + " steals " + starMap);
             location.starMap = null;
-            backtrace();
+            backtrace(true);
         }
     }
 
@@ -69,8 +71,11 @@ public class TVader extends TRover implements StateMachine {
         return true;
     }
 
-    private void backtrace() {
+    private void backtrace(boolean returnToBaseFirst) {
         queue = (ArrayList<Command>) history.clone();
+        if(returnToBaseFirst){
+            queue.add(0, new MoveCommand(this, baseLocation));
+        }
         history.clear();
     }
 
