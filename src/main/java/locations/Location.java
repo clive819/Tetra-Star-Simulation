@@ -67,18 +67,26 @@ public class Location {
     }
 
     private void renderTerrain(Graphics g, TetraUIDrawingPanel p, TRectangularFace f) {
+        boolean renderTerrainName = false;
         switch (this.terrain) {
             case river:
                 g.setColor(Colors.Terrain.river);
+                renderTerrainName = true;
                 break;
             case ground:
                 g.setColor(Colors.Terrain.ground);
                 break;
             case heroBase:
                 g.setColor(Colors.Terrain.heroBase);
+                renderTerrainName = true;
                 break;
             case vaderBase:
                 g.setColor(Colors.Terrain.vaderBase);
+                renderTerrainName = true;
+                break;
+            case mapBase:
+                g.setColor(Colors.Terrain.mapBase);
+                renderTerrainName = true;
                 break;
             default:
                 g.setColor(Colors.Terrain.defaultColor);
@@ -93,6 +101,10 @@ public class Location {
         int finalWidth = p.xScale(widthPerCell - finalXPadding * 2);
         int finalHeight = p.yScale(heightPerCell - finalYPadding * 2);
         g.fillRect(finalX, finalY, finalWidth, finalHeight);
+        if(renderTerrainName){
+            g.setColor(Colors.Terrain.name);
+            g.drawString(this.terrain.toString(),finalX, finalY + finalHeight);
+        }
     }
 
     private void renderRover(Graphics g, TetraUIDrawingPanel p, TRectangularFace f) {
@@ -114,6 +126,8 @@ public class Location {
             int finalWidth = p.xScale(widthPerCell - roverXPadding * 2);
             int finalHeight = p.yScale(heightPerCell - roverYPadding * 2);
             g.fillOval(finalX, finalY, finalWidth, finalHeight);
+            g.setColor(Colors.Rover.name);
+            g.drawString(this.rover.id,finalX, finalY + finalHeight/2);
         }
     }
 
