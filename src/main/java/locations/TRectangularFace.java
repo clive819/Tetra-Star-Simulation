@@ -57,8 +57,11 @@ public class TRectangularFace extends TFace {
     }
 
     @Override
-    public Location getAdjacent(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier) {
-        ArrayList<Location> dummyArray = getNeighbors(currentLocation, heroBaseAllowed, hasTFlier);
+    public Location getAdjacent(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier, boolean roverAllowed) {
+        ArrayList<Location> dummyArray = getNeighbors(currentLocation, heroBaseAllowed, hasTFlier, roverAllowed);
+        if(dummyArray.size() == 0){
+            return null;
+        }
         return dummyArray.get(new Random().nextInt(dummyArray.size()));
     }
 
@@ -135,7 +138,7 @@ public class TRectangularFace extends TFace {
     public void spawnVaderBase() {
         int[] coordinate = getRandomEmptyNonEdgeCoordinate(true);
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
-        ArrayList<Location> neighbors = getNeighbors(location, false, true);
+        ArrayList<Location> neighbors = getNeighbors(location, false, true, false);
 
         if (neighbors.size() < 4) {
             spawnVaderBase();
@@ -198,7 +201,7 @@ public class TRectangularFace extends TFace {
         return row == 0 || row == (rows - 1) || col == 0 || col == (cols - 1);
     }
 
-    private ArrayList<Location> getNeighbors(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier) {
+    private ArrayList<Location> getNeighbors(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier, boolean roverAllowed) {
         ArrayList<Location> dummyArray = new ArrayList<>();
 
         for (int[] offset : offsets) {
@@ -207,7 +210,7 @@ public class TRectangularFace extends TFace {
 
             if (row > -1 && row < rows && col > -1 && col < cols) {
                 Location location = cells.get(row).get(col);
-                if ((location.terrain == Terrain.heroBase && !heroBaseAllowed) || (location.terrain == Terrain.river && !hasTFlier)) {
+                if ((location.terrain == Terrain.heroBase && !heroBaseAllowed) || (location.terrain == Terrain.river && !hasTFlier) || (!location.isEmpty(false) && !roverAllowed)) {
                     continue;
                 }
                 dummyArray.add(location);

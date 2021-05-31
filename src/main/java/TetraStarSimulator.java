@@ -17,13 +17,14 @@ public class TetraStarSimulator {
 
     public void start() {
         TLogger.shared.log("start");
+        Tetra.shared.reset();
         setupSimulation();
         mediator.updateRender();
     }
 
     public void stop() {
         TLogger.shared.log("stop");
-        Tetra.shared.tFace.reset();
+        Tetra.shared.reset();
         mediator.updateRender();
     }
 

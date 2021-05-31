@@ -33,7 +33,7 @@ public class TVader extends TRover implements StateMachine {
 
     @Override
     public void randomMove() {
-        Location nextLocation = tFace.getAdjacent(currentLocation, false, true);
+        Location nextLocation = tFace.getAdjacent(currentLocation, false, true, false);
 
         if (nextLocation != null) {
             Command command = new MoveCommand(this, nextLocation);
@@ -65,6 +65,12 @@ public class TVader extends TRover implements StateMachine {
             location.starMap = null;
             backtrace(true);
         }
+    }
+
+    @Override
+    public void fullStall(Command command) {
+        super.fullStall(command);
+        queue.clear();
     }
 
     public boolean isVader() {

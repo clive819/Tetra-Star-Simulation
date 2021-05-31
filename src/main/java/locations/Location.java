@@ -31,6 +31,10 @@ public class Location {
         return rover == null && (!requireGround || terrain == Terrain.ground);
     }
 
+    public boolean hasStarMap(){
+        return starMap != null;
+    }
+
     public void enter(TRover rover) {
         this.rover = rover;
     }

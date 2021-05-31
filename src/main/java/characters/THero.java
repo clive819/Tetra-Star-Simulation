@@ -28,7 +28,7 @@ public class THero extends TRover implements StateMachine {
 
     @Override
     public void randomMove() {
-        Location nextLocation = tFace.getAdjacent(currentLocation, true, tFlier != null);
+        Location nextLocation = tFace.getAdjacent(currentLocation, true, tFlier != null, false);
 
         if (nextLocation != null) {
             queue.add(new MoveCommand(this, nextLocation));
@@ -42,7 +42,7 @@ public class THero extends TRover implements StateMachine {
         super.setCurrentLocation(location);
 
         if (location.terrain == Terrain.mapBase) {
-            if (location.isEmpty(false)) {
+            if (!location.hasStarMap()) {
                 requestTFlier();
                 queue.add(new MoveCommand(this, tFace.getVaderBase()));
             } else {

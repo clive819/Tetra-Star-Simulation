@@ -32,7 +32,7 @@ public class TRover implements StateMachine {
 
 
     public void randomMove() {
-        Location nextLocation = tFace.getAdjacent(currentLocation, false, false);
+        Location nextLocation = tFace.getAdjacent(currentLocation, false, false, false);
 
         if (nextLocation != null) {
             queue.add(new MoveCommand(this, nextLocation));
@@ -43,6 +43,11 @@ public class TRover implements StateMachine {
 
     public void delayExecute(Command command) {
         queue.add(0, command);
+    }
+
+    public void fullStall(Command command){
+        //no behavior on TRover currently
+        //currently used to allow TVader to break backtrace
     }
 
     @Override
