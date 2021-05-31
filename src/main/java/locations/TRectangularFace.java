@@ -69,7 +69,7 @@ public class TRectangularFace extends TFace {
 
     @Override
     public void spawnRover() {
-        int[] coordinate = getRandomEmptyCoordinate();
+        int[] coordinate = getRandomEmptyCoordinate(true);
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
 
         TRover tRover = new TRover("Rover " + TRover.count, Gender.male, this, location);
@@ -84,7 +84,7 @@ public class TRectangularFace extends TFace {
             for (int col = 0; col < cols; col++) {
                 Location location = cells.get(row).get(col);
 
-                if (location.terrain == Terrain.heroBase && location.isEmpty()) {
+                if (location.terrain == Terrain.heroBase && location.isEmpty(false)) {
                     THero tHero = new THero("Hero " + THero.count, Gender.male, this, location);
                     location.enter(tHero);
                     rovers.add(tHero);
@@ -104,7 +104,7 @@ public class TRectangularFace extends TFace {
             for (int col = 0; col < cols; col++) {
                 Location location = cells.get(row).get(col);
 
-                if (location.terrain == Terrain.vaderBase && location.isEmpty()) {
+                if (location.terrain == Terrain.vaderBase && location.isEmpty(false)) {
                     TVader tVader = new TVader("Vader " + TVader.count, Gender.male, this, location);
                     location.enter(tVader);
                     rovers.add(tVader);
@@ -120,7 +120,7 @@ public class TRectangularFace extends TFace {
 
     @Override
     public void spawnMapBase() {
-        int[] coordinate = getRandomEmptyCoordinate();
+        int[] coordinate = getRandomEmptyCoordinate(true);
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
 
         StarMap starMap = new StarMap("StarMap " + StarMap.count, location.id);
@@ -133,7 +133,7 @@ public class TRectangularFace extends TFace {
 
     @Override
     public void spawnVaderBase() {
-        int[] coordinate = getRandomEmptyNonEdgeCoordinate();
+        int[] coordinate = getRandomEmptyNonEdgeCoordinate(true);
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
         ArrayList<Location> neighbors = getNeighbors(location, false, true);
 
@@ -150,28 +150,28 @@ public class TRectangularFace extends TFace {
 
     @Override
     public void spawnHeroBase() {
-        int[] coordinate = getRandomEmptyEdgeCoordinate();
+        int[] coordinate = getRandomEmptyEdgeCoordinate(true);
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
         location.setTerrain(Terrain.heroBase);
     }
 
-    private int[] getRandomEmptyCoordinate() {
+    private int[] getRandomEmptyCoordinate(boolean requireGround) {
         int row = new Random().nextInt(rows);
         int col = new Random().nextInt(cols);
 
-        if (!cells.get(row).get(col).isEmpty()) {
+        if (!cells.get(row).get(col).isEmpty(requireGround)) {
             // *** what to do if there are no empty location? ***
-            return getRandomEmptyCoordinate();
+            return getRandomEmptyCoordinate(requireGround);
         }
         return new int[]{row, col};
     }
 
-    private int[] getRandomEmptyEdgeCoordinate() {
+    private int[] getRandomEmptyEdgeCoordinate(boolean requireGround) {
         ArrayList<int[]> dummyArray = new ArrayList<>();
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                if (isEdge(row, col) && cells.get(row).get(col).isEmpty()) {
+                if (isEdge(row, col) && cells.get(row).get(col).isEmpty(requireGround)) {
                     dummyArray.add(new int[]{row, col});
                 }
             }
@@ -180,12 +180,12 @@ public class TRectangularFace extends TFace {
         return dummyArray.get(new Random().nextInt(dummyArray.size()));
     }
 
-    private int[] getRandomEmptyNonEdgeCoordinate() {
+    private int[] getRandomEmptyNonEdgeCoordinate(boolean requireGround) {
         ArrayList<int[]> dummyArray = new ArrayList<>();
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                if (!isEdge(row, col) && cells.get(row).get(col).isEmpty()) {
+                if (!isEdge(row, col) && cells.get(row).get(col).isEmpty(requireGround)) {
                     dummyArray.add(new int[]{row, col});
                 }
             }

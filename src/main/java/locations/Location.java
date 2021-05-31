@@ -27,8 +27,8 @@ public class Location {
         starMap = null;
     }
 
-    public boolean isEmpty() {
-        return rover == null;
+    public boolean isEmpty(boolean requireGround) {
+        return rover == null && (!requireGround || terrain == Terrain.ground);
     }
 
     public void enter(TRover rover) {

@@ -42,7 +42,7 @@ public class THero extends TRover implements StateMachine {
         super.setCurrentLocation(location);
 
         if (location.terrain == Terrain.mapBase) {
-            if (location.isEmpty()) {
+            if (location.isEmpty(false)) {
                 requestTFlier();
                 queue.add(new MoveCommand(this, currentLocation, tFace.getVaderBase()));
             } else {

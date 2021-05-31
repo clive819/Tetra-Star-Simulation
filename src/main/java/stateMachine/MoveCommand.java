@@ -20,7 +20,7 @@ public class MoveCommand implements Command {
 
     @Override
     public void execute() {
-        if (to.isEmpty()) {
+        if (to.isEmpty(false)) {
             TLogger.shared.log(tRover + " moved from " + from + " to " + to);
             from.leave(tRover);
             to.enter(tRover);
