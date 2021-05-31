@@ -34,7 +34,7 @@ public class TVader extends TRover implements StateMachine {
         Location nextLocation = tFace.getAdjacent(currentLocation, false, true);
 
         if (nextLocation != null) {
-            Command command = new MoveCommand(this, currentLocation, nextLocation);
+            Command command = new MoveCommand(this, nextLocation);
             queue.add(command);
             history.add(command);
         } else {

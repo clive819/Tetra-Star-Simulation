@@ -7,13 +7,11 @@ import main.java.logging.TLogger;
 public class MoveCommand implements Command {
 
     TRover tRover;
-    Location from;
     Location to;
     int stallCount;
 
-    public MoveCommand(TRover tRover, Location from, Location to) {
+    public MoveCommand(TRover tRover, Location to) {
         this.tRover = tRover;
-        this.from = from;
         this.to = to;
         stallCount = 0;
     }
@@ -21,6 +19,7 @@ public class MoveCommand implements Command {
     @Override
     public void execute() {
         if (to.isEmpty(false)) {
+            Location from = tRover.currentLocation;
             TLogger.shared.log(tRover + " moved from " + from + " to " + to);
             from.leave(tRover);
             to.enter(tRover);
@@ -40,7 +39,7 @@ public class MoveCommand implements Command {
     public String toString() {
         return "MoveCommand{" +
                 "tRover=" + tRover +
-                ", from=" + from +
+                ", from=" + tRover.currentLocation +
                 ", to=" + to +
                 '}';
     }

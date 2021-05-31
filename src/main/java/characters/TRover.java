@@ -35,7 +35,7 @@ public class TRover implements StateMachine {
         Location nextLocation = tFace.getAdjacent(currentLocation, false, false);
 
         if (nextLocation != null) {
-            queue.add(new MoveCommand(this, currentLocation, nextLocation));
+            queue.add(new MoveCommand(this, nextLocation));
         } else {
             queue.add(new NoMoreMovesCommand(this));
         }

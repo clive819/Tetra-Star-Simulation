@@ -31,7 +31,7 @@ public class THero extends TRover implements StateMachine {
         Location nextLocation = tFace.getAdjacent(currentLocation, true, tFlier != null);
 
         if (nextLocation != null) {
-            queue.add(new MoveCommand(this, currentLocation, nextLocation));
+            queue.add(new MoveCommand(this, nextLocation));
         } else {
             queue.add(new NoMoreMovesCommand(this));
         }
@@ -44,7 +44,7 @@ public class THero extends TRover implements StateMachine {
         if (location.terrain == Terrain.mapBase) {
             if (location.isEmpty(false)) {
                 requestTFlier();
-                queue.add(new MoveCommand(this, currentLocation, tFace.getVaderBase()));
+                queue.add(new MoveCommand(this, tFace.getVaderBase()));
             } else {
                 enterMapBase(location);
             }
@@ -84,7 +84,7 @@ public class THero extends TRover implements StateMachine {
                     }
                 }
 
-                queue.add(new MoveCommand(this, location, base));
+                queue.add(new MoveCommand(this, base));
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
                 TLogger.shared.log(e.toString());
