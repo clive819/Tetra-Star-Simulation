@@ -42,7 +42,18 @@ public class THero extends TRover implements StateMachine {
         super.setCurrentLocation(location);
 
         if (location.terrain == Terrain.mapBase) {
-            if (!location.hasStarMap()) {
+            if (starMap != null) {
+                location.store(starMap);
+
+                try {
+                    starMap = starMap.clone();
+                    queue.add(new MoveCommand(this, base));
+                    TLogger.shared.log(this + " store " + location.starMap + " back to its base.");
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                    TLogger.shared.log(e.toString());
+                }
+            } else if (!location.hasStarMap()) {
                 requestTFlier();
                 queue.add(new MoveCommand(this, tFace.getVaderBase()));
             } else {
@@ -73,22 +84,19 @@ public class THero extends TRover implements StateMachine {
 
     private void enterVaderBase(Location location) {
         if (AbstractStarMap.ping(location.id)) {
-            try {
-                starMap = location.starMap.clone();
+            starMap = location.starMap;
+            location.starMap = null;
+            TLogger.shared.log(this + " found " + starMap + " in vader base");
 
-                if (starMap.isEncrypted()) {
-                    if (starMap.hasAuthority(this)) {
-                        starMap.restorationCount += 1;
-                    }else {
-                        starMap.authorize(this);
-                    }
+            if (starMap.isEncrypted()) {
+                if (starMap.hasAuthority(this)) {
+                    starMap.restorationCount += 1;
+                } else {
+                    starMap.authorize(this);
                 }
-
-                queue.add(new MoveCommand(this, base));
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-                TLogger.shared.log(e.toString());
             }
+
+            queue.add(new MoveCommand(this, starMap.base));
         }
     }
 

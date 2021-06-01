@@ -1,15 +1,16 @@
 package main.java.starMap;
 
 import main.java.characters.THero;
+import main.java.locations.Location;
 
 import java.util.ArrayList;
 
 public class StarAtlas extends AbstractStarMap {
 
-    private ArrayList<AbstractStarMap> starMaps;
+    private final ArrayList<AbstractStarMap> starMaps;
 
-    public StarAtlas(String id, String locationID) {
-        super(id, locationID);
+    public StarAtlas(String id, Location base) {
+        super(id, base);
         starMaps = new ArrayList<>();
     }
 
@@ -20,21 +21,21 @@ public class StarAtlas extends AbstractStarMap {
 
     @Override
     public void encrypt(THero tHero, String symbol) {
-        for (AbstractStarMap starMap:starMaps) {
+        for (AbstractStarMap starMap : starMaps) {
             starMap.encrypt(tHero, symbol);
         }
     }
 
     @Override
     public void decrypt(THero tHero) {
-        for (AbstractStarMap starMap:starMaps) {
+        for (AbstractStarMap starMap : starMaps) {
             starMap.decrypt(tHero);
         }
     }
 
     @Override
     public void display() {
-        for (AbstractStarMap starMap:starMaps) {
+        for (AbstractStarMap starMap : starMaps) {
             starMap.display();
         }
     }
@@ -47,7 +48,7 @@ public class StarAtlas extends AbstractStarMap {
 
     @Override
     public boolean hasAuthority(THero tHero) {
-        for (AbstractStarMap starMap:starMaps) {
+        for (AbstractStarMap starMap : starMaps) {
             if (starMap.hasAuthority(tHero)) {
                 return true;
             }

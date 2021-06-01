@@ -1,6 +1,7 @@
 package main.java.starMap;
 
 import main.java.characters.THero;
+import main.java.locations.Location;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,8 +9,9 @@ import java.util.HashSet;
 public abstract class AbstractStarMap implements Cloneable {
 
     public String id;
-    public String locationID;
     public String dateOfEncryption;
+    public Location base;
+    public Location currentLocation;
     public ArrayList<THero> heroes;
     public int restorationCount;
 
@@ -18,9 +20,10 @@ public abstract class AbstractStarMap implements Cloneable {
     static HashSet<String> locations = new HashSet<>();
 
 
-    public AbstractStarMap(String id, String locationID) {
+    public AbstractStarMap(String id, Location base) {
         this.id = id;
-        setLocationID(locationID);
+        this.base = base;
+        setLocation(base);
         dateOfEncryption = "";
         heroes = new ArrayList<>();
         restorationCount = 0;
@@ -30,7 +33,7 @@ public abstract class AbstractStarMap implements Cloneable {
 
     @Override
     public AbstractStarMap clone() throws CloneNotSupportedException {
-        return (AbstractStarMap)super.clone();
+        return (AbstractStarMap) super.clone();
     }
 
     public abstract int numberOfItems();
@@ -55,12 +58,12 @@ public abstract class AbstractStarMap implements Cloneable {
         heroes.add(tHero);
     }
 
-    public void setLocationID(String locationID) {
-        if (this.locationID != null) {
-            locations.remove(this.locationID);
+    public void setLocation(Location location) {
+        if (this.currentLocation != null) {
+            locations.remove(this.currentLocation.id);
         }
-        this.locationID = locationID;
-        locations.add(locationID);
+        this.currentLocation = location;
+        locations.add(location.id);
     }
 
     public static boolean ping(String locationID) {

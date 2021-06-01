@@ -17,9 +17,9 @@ public class TVader extends TRover implements StateMachine {
     TFlier tFlier;
 
     private AbstractStarMap starMap;
-    private Location baseLocation;
+    private final Location baseLocation;
 
-    private ArrayList<Command> history;
+    private final ArrayList<Command> history;
 
 
     public TVader(String id, Gender gender, TFace tFace, Location location) {
@@ -50,8 +50,7 @@ public class TVader extends TRover implements StateMachine {
 
         if (location.terrain == Terrain.mapBase) {
             stealStarMap(location);
-
-        }else if (location.terrain == Terrain.vaderBase) {
+        } else if (location.terrain == Terrain.vaderBase) {
             location.store(starMap);
             starMap = null;
         }
@@ -79,7 +78,7 @@ public class TVader extends TRover implements StateMachine {
 
     private void backtrace(boolean returnToBaseFirst) {
         queue = (ArrayList<Command>) history.clone();
-        if(returnToBaseFirst){
+        if (returnToBaseFirst) {
             queue.add(0, new MoveCommand(this, baseLocation));
         }
         history.clear();

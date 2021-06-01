@@ -59,7 +59,7 @@ public class TRectangularFace extends TFace {
     @Override
     public Location getAdjacent(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier, boolean roverAllowed) {
         ArrayList<Location> dummyArray = getNeighbors(currentLocation, heroBaseAllowed, hasTFlier, roverAllowed);
-        if(dummyArray.size() == 0){
+        if (dummyArray.size() == 0) {
             return null;
         }
         return dummyArray.get(new Random().nextInt(dummyArray.size()));
@@ -126,7 +126,7 @@ public class TRectangularFace extends TFace {
         int[] coordinate = getRandomEmptyCoordinate(true);
         Location location = cells.get(coordinate[0]).get(coordinate[1]);
 
-        StarMap starMap = new StarMap("StarMap " + StarMap.count, location.id);
+        StarMap starMap = new StarMap("StarMap " + StarMap.count, location);
         StarMapBody starMapBody = new StarMapTextBody("Directions to Planet Earth from Tetra");
 
         starMap.setBody(starMapBody);

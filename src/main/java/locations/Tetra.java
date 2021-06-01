@@ -24,7 +24,7 @@ public class Tetra {
         tFace.nextStep();
     }
 
-    public void reset(){
+    public void reset() {
         day = 1;
         tFace.reset();
     }

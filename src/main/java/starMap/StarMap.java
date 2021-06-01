@@ -1,6 +1,7 @@
 package main.java.starMap;
 
 import main.java.characters.THero;
+import main.java.locations.Location;
 import main.java.logging.TLogger;
 
 import java.util.Date;
@@ -9,8 +10,8 @@ public class StarMap extends AbstractStarMap {
 
     private StarMapBody body;
 
-    public StarMap(String id, String locationID) {
-        super(id, locationID);
+    public StarMap(String id, Location base) {
+        super(id, base);
     }
 
     public void setBody(StarMapBody starMapBody) {
@@ -50,7 +51,7 @@ public class StarMap extends AbstractStarMap {
 
     @Override
     public AbstractStarMap add(AbstractStarMap abstractStarMap) {
-        StarAtlas starAtlas = new StarAtlas("StarAtlas" + StarAtlas.count, locationID);
+        StarAtlas starAtlas = new StarAtlas("StarAtlas" + StarAtlas.count, base);
         starAtlas.add(this);
         starAtlas.add(abstractStarMap);
         return starAtlas;
