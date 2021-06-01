@@ -2,6 +2,7 @@ package main.java.characters;
 
 import main.java.locations.Location;
 import main.java.locations.TFace;
+import main.java.starMap.AbstractStarMap;
 import main.java.stateMachine.Command;
 import main.java.stateMachine.MoveCommand;
 import main.java.stateMachine.NoMoreMovesCommand;
@@ -61,6 +62,14 @@ public class TRover implements StateMachine {
 
     public void setCurrentLocation(Location location) {
         currentLocation = location;
+    }
+
+    public AbstractStarMap getStarMap(){
+        return null;
+    }
+
+    public TFlier getFlier(){
+        return null;
     }
 
     public boolean isHero() {

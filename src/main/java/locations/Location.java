@@ -1,6 +1,7 @@
 package main.java.locations;
 
 import main.java.characters.Colors;
+import main.java.characters.TFlier;
 import main.java.characters.TRover;
 import main.java.starMap.AbstractStarMap;
 import main.java.ui.TetraUIDrawingPanel;
@@ -17,7 +18,7 @@ public class Location {
     public String id;
     public AbstractStarMap starMap;
 
-    private final int RENDER_PADDING = 20;
+    private final int TILE_PADDING = 10;
 
     public Location(Terrain terrain, int row, int col, String id) {
         this.row = row;
@@ -93,8 +94,8 @@ public class Location {
                 g.setColor(Colors.Terrain.defaultColor);
         }
 
-        int finalXPadding = p.xScale(RENDER_PADDING);
-        int finalYPadding = p.yScale(RENDER_PADDING);
+        int finalXPadding = TILE_PADDING;
+        int finalYPadding = TILE_PADDING;
         int widthPerCell = p.WIDTH / f.cols;
         int heightPerCell = p.HEIGHT / f.rows;
         int finalX = p.xScale(col * widthPerCell + finalXPadding);
@@ -103,8 +104,12 @@ public class Location {
         int finalHeight = p.yScale(heightPerCell - finalYPadding * 2);
         g.fillRect(finalX, finalY, finalWidth, finalHeight);
         if(renderTerrainName){
-            g.setColor(Colors.Terrain.name);
+            g.setColor(Colors.Terrain.text);
             g.drawString(this.terrain.toString(),finalX, finalY + finalHeight);
+        }
+
+        if(this.starMap != null){
+            renderStarMap(g, p, f, this.starMap, false);
         }
     }
 
@@ -120,16 +125,59 @@ public class Location {
 
             int widthPerCell = p.WIDTH / f.cols;
             int heightPerCell = p.HEIGHT / f.rows;
-            int roverXPadding = p.xScale(widthPerCell / 2);
-            int roverYPadding = p.yScale(heightPerCell / 2);
+            int roverXPadding = widthPerCell / 6;
+            int roverYPadding = heightPerCell / 6;
             int finalX = p.xScale(col * widthPerCell + roverXPadding);
             int finalY = p.yScale(row * heightPerCell + roverYPadding);
             int finalWidth = p.xScale(widthPerCell - roverXPadding * 2);
             int finalHeight = p.yScale(heightPerCell - roverYPadding * 2);
             g.fillOval(finalX, finalY, finalWidth, finalHeight);
-            g.setColor(Colors.Rover.name);
+            g.setColor(Colors.Rover.text);
             g.drawString(this.rover.id,finalX, finalY + finalHeight/2);
+
+            TFlier flier = rover.getFlier();
+            if(flier != null){
+                int flierHeight = finalHeight/4;
+                int flierY = finalY + finalHeight - flierHeight;
+                g.setColor(Colors.Rover.flier);
+                g.fillRect(finalX, flierY, finalWidth, flierHeight);
+                g.setColor(Colors.Rover.text);
+                g.drawString("flier", finalX, flierY + flierHeight);
+            }
+
+            AbstractStarMap map = rover.getStarMap();
+            if(map != null){
+                renderStarMap(g, p, f, map, true);
+            }
         }
+    }
+
+    private void renderStarMap(Graphics g, TetraUIDrawingPanel p, TRectangularFace f, AbstractStarMap starMap, boolean onRover){
+        g.setColor(Colors.StarMap.map);
+
+        int widthPerCell = p.WIDTH / f.cols;
+        int heightPerCell = p.HEIGHT / f.rows;
+        int xPadding = widthPerCell / 3;
+        int yPadding = heightPerCell / 3;
+        int finalX = p.xScale(col * widthPerCell + xPadding);
+        int finalY = p.yScale(row * heightPerCell + yPadding);
+        if(!onRover){
+            finalX = p.xScale(col * widthPerCell + TILE_PADDING);
+            finalY = p.yScale(row * heightPerCell + TILE_PADDING);
+        }
+        int finalWidth = p.xScale(widthPerCell - xPadding * 2);
+        int finalHeight = p.yScale(heightPerCell - yPadding * 2);
+
+        g.fillRect(finalX, finalY, finalWidth, finalHeight);
+
+        g.setColor(Colors.StarMap.text);
+
+        String extraMapCount = "";
+        int numItems = starMap.numberOfItems();
+        if(numItems > 1){
+            extraMapCount = " x" + numItems;
+        }
+        g.drawString("map" + extraMapCount,finalX, finalY + finalHeight);
     }
 
     @Override

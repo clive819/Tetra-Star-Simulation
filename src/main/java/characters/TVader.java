@@ -72,6 +72,14 @@ public class TVader extends TRover implements StateMachine {
         queue.clear();
     }
 
+    public AbstractStarMap getStarMap(){
+        return starMap;
+    }
+
+    public TFlier getFlier(){
+        return tFlier;
+    }
+
     public boolean isVader() {
         return true;
     }

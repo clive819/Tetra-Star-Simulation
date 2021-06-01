@@ -100,6 +100,14 @@ public class THero extends TRover implements StateMachine {
         }
     }
 
+    public TFlier getFlier(){
+        return tFlier;
+    }
+
+    public AbstractStarMap getStarMap(){
+        return starMap;
+    }
+
     private void requestTFlier() {
         if (tFlier == null) {
             queue.add(new AcquireTFlierCommand(this));
