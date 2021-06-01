@@ -46,6 +46,7 @@ public class TRectangularFace extends TFace {
     public void reset() {
         cells = new ArrayList<>();
         rovers = new ArrayList<>();
+        TRover.count = 0;
         initialize();
     }
 

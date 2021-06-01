@@ -62,7 +62,7 @@ public class TetraUI {
             c.gridheight = 2;
             container.add(buttonsPanel, c);
 
-            setSize(1200, 600);
+            setSize(1200, 800);
             setVisible(true);
 
             TLogger.shared.setOutput(textPanel);
