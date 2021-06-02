@@ -17,7 +17,7 @@ public class TRover implements StateMachine {
     public static int count = 0;
 
     // the surface that TetRover reside in
-    public TFace tFace;
+    protected TFace tFace;
     public Location currentLocation;
 
     public ArrayList<Command> queue;
@@ -32,7 +32,7 @@ public class TRover implements StateMachine {
     }
 
 
-    public void randomMove() {
+    protected void randomMove() {
         Location nextLocation = tFace.getAdjacent(currentLocation, false, false, false);
 
         if (nextLocation != null) {

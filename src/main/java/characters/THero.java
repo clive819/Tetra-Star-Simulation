@@ -12,8 +12,7 @@ import main.java.stateMachine.StateMachine;
 
 public class THero extends TRover implements StateMachine {
 
-    TFlier tFlier;
-
+    private TFlier tFlier;
     private AbstractStarMap starMap;
 
     private final Location base;
@@ -27,7 +26,7 @@ public class THero extends TRover implements StateMachine {
 
 
     @Override
-    public void randomMove() {
+    protected void randomMove() {
         Location nextLocation = tFace.getAdjacent(currentLocation, true, tFlier != null, false);
 
         if (nextLocation != null) {

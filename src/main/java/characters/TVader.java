@@ -14,11 +14,10 @@ import java.util.ArrayList;
 
 public class TVader extends TRover implements StateMachine {
 
-    TFlier tFlier;
-
+    private TFlier tFlier;
     private AbstractStarMap starMap;
-    private final Location baseLocation;
 
+    private final Location baseLocation;
     private final ArrayList<Command> history;
 
 
@@ -32,7 +31,7 @@ public class TVader extends TRover implements StateMachine {
 
 
     @Override
-    public void randomMove() {
+    protected void randomMove() {
         Location nextLocation = tFace.getAdjacent(currentLocation, false, true, false);
 
         if (nextLocation != null) {
