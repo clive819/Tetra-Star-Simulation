@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class TVader extends TRover implements StateMachine {
 
-    private TFlier tFlier;
+    private final TFlier tFlier;
     private AbstractStarMap starMap;
 
     private final Location baseLocation;
@@ -71,11 +71,11 @@ public class TVader extends TRover implements StateMachine {
         queue.clear();
     }
 
-    public AbstractStarMap getStarMap(){
+    public AbstractStarMap getStarMap() {
         return starMap;
     }
 
-    public TFlier getFlier(){
+    public TFlier getFlier() {
         return tFlier;
     }
 

@@ -10,9 +10,8 @@ import java.awt.*;
 
 public class Location {
 
-    int row;
-    int col;
-
+    public int row;
+    public int col;
     public TRover rover;
     public Terrain terrain;
     public String id;
@@ -103,12 +102,12 @@ public class Location {
         int finalWidth = p.xScale(widthPerCell - finalXPadding * 2);
         int finalHeight = p.yScale(heightPerCell - finalYPadding * 2);
         g.fillRect(finalX, finalY, finalWidth, finalHeight);
-        if(renderTerrainName){
+        if (renderTerrainName) {
             g.setColor(Colors.Terrain.text);
-            g.drawString(this.terrain.toString(),finalX, finalY + finalHeight);
+            g.drawString(this.terrain.toString(), finalX, finalY + finalHeight);
         }
 
-        if(this.starMap != null){
+        if (this.starMap != null) {
             renderStarMap(g, p, f, this.starMap, false);
         }
     }
@@ -133,11 +132,11 @@ public class Location {
             int finalHeight = p.yScale(heightPerCell - roverYPadding * 2);
             g.fillOval(finalX, finalY, finalWidth, finalHeight);
             g.setColor(Colors.Rover.text);
-            g.drawString(this.rover.id,finalX, finalY + finalHeight/2);
+            g.drawString(this.rover.id, finalX, finalY + finalHeight / 2);
 
             TFlier flier = rover.getFlier();
-            if(flier != null){
-                int flierHeight = finalHeight/4;
+            if (flier != null) {
+                int flierHeight = finalHeight / 4;
                 int flierY = finalY + finalHeight - flierHeight;
                 g.setColor(Colors.Rover.flier);
                 g.fillRect(finalX, flierY, finalWidth, flierHeight);
@@ -146,13 +145,13 @@ public class Location {
             }
 
             AbstractStarMap map = rover.getStarMap();
-            if(map != null){
+            if (map != null) {
                 renderStarMap(g, p, f, map, true);
             }
         }
     }
 
-    private void renderStarMap(Graphics g, TetraUIDrawingPanel p, TRectangularFace f, AbstractStarMap starMap, boolean onRover){
+    private void renderStarMap(Graphics g, TetraUIDrawingPanel p, TRectangularFace f, AbstractStarMap starMap, boolean onRover) {
         g.setColor(Colors.StarMap.map);
 
         int widthPerCell = p.WIDTH / f.cols;
@@ -161,7 +160,7 @@ public class Location {
         int yPadding = heightPerCell / 3;
         int finalX = p.xScale(col * widthPerCell + xPadding);
         int finalY = p.yScale(row * heightPerCell + yPadding);
-        if(!onRover){
+        if (!onRover) {
             finalX = p.xScale(col * widthPerCell + TILE_PADDING);
             finalY = p.yScale(row * heightPerCell + TILE_PADDING);
         }
@@ -174,10 +173,10 @@ public class Location {
 
         String extraMapCount = "";
         int numItems = starMap.numberOfItems();
-        if(numItems > 1){
+        if (numItems > 1) {
             extraMapCount = " x" + numItems;
         }
-        g.drawString("map" + extraMapCount,finalX, finalY + finalHeight);
+        g.drawString("map" + extraMapCount, finalX, finalY + finalHeight);
     }
 
     @Override

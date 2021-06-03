@@ -2,7 +2,6 @@ package main.java;
 
 import main.java.locations.TRectangularFace;
 import main.java.locations.Tetra;
-import main.java.logging.TLogger;
 import main.java.ui.TetraUI;
 import main.java.ui.TetraUIDrawingPanel;
 

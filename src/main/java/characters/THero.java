@@ -106,11 +106,11 @@ public class THero extends TRover implements StateMachine {
         }
     }
 
-    public TFlier getFlier(){
+    public TFlier getFlier() {
         return tFlier;
     }
 
-    public AbstractStarMap getStarMap(){
+    public AbstractStarMap getStarMap() {
         return starMap;
     }
 
@@ -128,11 +128,11 @@ public class THero extends TRover implements StateMachine {
         return true;
     }
 
-    public AbstractEncryptionStrategy getEncryptionStrategy(){
+    public AbstractEncryptionStrategy getEncryptionStrategy() {
         return this.encryptionStrategy;
     }
 
-    public void setEncryptionStrategy(AbstractEncryptionStrategy strategy){
+    public void setEncryptionStrategy(AbstractEncryptionStrategy strategy) {
         this.encryptionStrategy = strategy;
     }
 
