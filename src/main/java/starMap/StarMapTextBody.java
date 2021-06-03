@@ -13,14 +13,14 @@ public class StarMapTextBody implements StarMapBody {
     }
 
     @Override
-    public void encrypt(String symbol) {
-        direction = new StringBuilder(direction).reverse().toString();
-        this.symbol = symbol;
+    public void encrypt(AbstractEncryptionStrategy strategy) {
+        direction = strategy.encrypt(direction);
+        this.symbol = strategy.getSymbol();
     }
 
     @Override
-    public void decrypt() {
-        direction = new StringBuilder(direction).reverse().toString();
+    public void decrypt(AbstractEncryptionStrategy strategy) {
+        direction = strategy.decrypt(direction);
         TLogger.shared.log("Symbol: " + symbol);
     }
 

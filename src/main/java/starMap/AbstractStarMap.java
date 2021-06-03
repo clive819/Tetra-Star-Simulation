@@ -38,11 +38,11 @@ public abstract class AbstractStarMap implements Cloneable {
 
     public abstract int numberOfItems();
 
-    public abstract void encrypt(THero tHero, String symbol);
+    public abstract void encrypt(THero tHero);
 
     public abstract void decrypt(THero tHero);
 
-    public abstract void display();
+    public abstract void display(THero tHero, int date);
 
     public abstract AbstractStarMap add(AbstractStarMap abstractStarMap);
 

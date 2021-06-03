@@ -24,10 +24,10 @@ public class StarMap extends AbstractStarMap {
     }
 
     @Override
-    public void encrypt(THero tHero, String symbol) {
+    public void encrypt(THero tHero) {
         if (!isEncrypted()) {
             dateOfEncryption = new Date().toString();
-            body.encrypt(symbol);
+            body.encrypt(tHero.getEncryptionStrategy());
             heroes.add(tHero);
             TLogger.shared.log(this + " is encrypted by " + tHero);
         }
@@ -36,15 +36,16 @@ public class StarMap extends AbstractStarMap {
     @Override
     public void decrypt(THero tHero) {
         if (isEncrypted() && hasAuthority(tHero)) {
-            body.decrypt();
+            body.decrypt(tHero.getEncryptionStrategy());
             dateOfEncryption = "";
             TLogger.shared.log(this + " is decrypted by " + tHero);
         }
     }
 
     @Override
-    public void display() {
+    public void display(THero tHero, int date) {
         TLogger.shared.log("********************");
+        TLogger.shared.log("ID: " + tHero.id + " Day: " + date);
         body.display();
         TLogger.shared.log("********************");
     }

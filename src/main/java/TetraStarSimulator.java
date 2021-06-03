@@ -16,20 +16,17 @@ public class TetraStarSimulator {
     }
 
     public void start() {
-        TLogger.shared.log("start");
         Tetra.shared.reset();
         setupSimulation();
         mediator.updateRender();
     }
 
     public void stop() {
-        TLogger.shared.log("stop");
         Tetra.shared.reset();
         mediator.updateRender();
     }
 
     public void nextStep() {
-        TLogger.shared.log("nextStep");
         Tetra.shared.nextStep();
         mediator.updateRender();
     }
@@ -49,10 +46,9 @@ public class TetraStarSimulator {
 
     public void setupSimulation() {
         Tetra.shared.tFace.spawnHero();
+        Tetra.shared.tFace.spawnHero();
         Tetra.shared.tFace.spawnVader();
-        Tetra.shared.tFace.spawnRover();
         Tetra.shared.tFace.spawnMapBase();
-        // TODO
     }
 
     ///////////////

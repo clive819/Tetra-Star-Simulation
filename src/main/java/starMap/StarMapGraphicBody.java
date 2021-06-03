@@ -2,12 +2,12 @@ package main.java.starMap;
 
 public class StarMapGraphicBody implements StarMapBody {
     @Override
-    public void encrypt(String symbol) {
+    public void encrypt(AbstractEncryptionStrategy strategy) {
 
     }
 
     @Override
-    public void decrypt() {
+    public void decrypt(AbstractEncryptionStrategy strategy) {
 
     }
 

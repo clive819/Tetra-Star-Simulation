@@ -20,9 +20,9 @@ public class StarAtlas extends AbstractStarMap {
     }
 
     @Override
-    public void encrypt(THero tHero, String symbol) {
+    public void encrypt(THero tHero) {
         for (AbstractStarMap starMap : starMaps) {
-            starMap.encrypt(tHero, symbol);
+            starMap.encrypt(tHero);
         }
     }
 
@@ -34,9 +34,9 @@ public class StarAtlas extends AbstractStarMap {
     }
 
     @Override
-    public void display() {
+    public void display(THero tHero, int date) {
         for (AbstractStarMap starMap : starMaps) {
-            starMap.display();
+            starMap.display(tHero, date);
         }
     }
 

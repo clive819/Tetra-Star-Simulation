@@ -10,6 +10,7 @@ public class SimulationUIMediator {
     private TetraUIDrawingPanel drawingPanel;
     private TetraStarSimulator simulation;
 
+    // one time setters for each connectable object
     public void setButtonsPanel(TetraUIButtonsPanel buttonsPanel) {
         if (this.buttonsPanel == null) {
             this.buttonsPanel = buttonsPanel;
@@ -28,6 +29,7 @@ public class SimulationUIMediator {
         }
     }
 
+    // control tools
     public void start() {
         simulation.start();
     }

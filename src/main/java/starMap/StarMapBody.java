@@ -1,9 +1,9 @@
 package main.java.starMap;
 
 public interface StarMapBody {
-    void encrypt(String symbol);
+    void encrypt(AbstractEncryptionStrategy strategy);
 
-    void decrypt();
+    void decrypt(AbstractEncryptionStrategy strategy);
 
     void display();
 }

@@ -3,8 +3,11 @@ package main.java.characters;
 import main.java.locations.Location;
 import main.java.locations.TFace;
 import main.java.locations.Terrain;
+import main.java.locations.Tetra;
 import main.java.logging.TLogger;
+import main.java.starMap.AbstractEncryptionStrategy;
 import main.java.starMap.AbstractStarMap;
+import main.java.starMap.ReverseEncryptionStrategy;
 import main.java.stateMachine.AcquireTFlierCommand;
 import main.java.stateMachine.MoveCommand;
 import main.java.stateMachine.NoMoreMovesCommand;
@@ -14,12 +17,14 @@ public class THero extends TRover implements StateMachine {
 
     private TFlier tFlier;
     private AbstractStarMap starMap;
+    private AbstractEncryptionStrategy encryptionStrategy;
 
     private final Location base;
 
 
     public THero(String id, Gender gender, TFace tFace, Location location) {
         super(id, gender, tFace, location);
+        this.encryptionStrategy = new ReverseEncryptionStrategy("*");
         base = location;
         starMap = null;
     }
@@ -42,10 +47,12 @@ public class THero extends TRover implements StateMachine {
 
         if (location.terrain == Terrain.mapBase) {
             if (starMap != null) {
-                location.store(starMap);
 
                 try {
-                    starMap = starMap.clone();
+                    AbstractStarMap starMapCopy = starMap.clone();
+                    starMap.encrypt(this);
+                    location.store(starMap);
+                    starMap = starMapCopy;
                     queue.add(new MoveCommand(this, base));
                     TLogger.shared.log(this + " store " + location.starMap + " back to its base.");
                 } catch (CloneNotSupportedException e) {
@@ -77,7 +84,7 @@ public class THero extends TRover implements StateMachine {
                     starMap.authorize(this);
                 }
             }
-            starMap.display();
+            starMap.display(this, Tetra.shared.day);
         }
     }
 
@@ -119,6 +126,14 @@ public class THero extends TRover implements StateMachine {
 
     public boolean isHero() {
         return true;
+    }
+
+    public AbstractEncryptionStrategy getEncryptionStrategy(){
+        return this.encryptionStrategy;
+    }
+
+    public void setEncryptionStrategy(AbstractEncryptionStrategy strategy){
+        this.encryptionStrategy = strategy;
     }
 
     @Override
