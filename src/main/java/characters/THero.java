@@ -13,6 +13,9 @@ import main.java.stateMachine.MoveCommand;
 import main.java.stateMachine.NoMoreMovesCommand;
 import main.java.stateMachine.StateMachine;
 
+//THero:
+//can encrypt and decrypt starmaps
+//visits the tVaderBase if a mapBase is found to be empty to retrieve a starmap
 public class THero extends TRover implements StateMachine {
 
     private TFlier tFlier;
@@ -41,6 +44,7 @@ public class THero extends TRover implements StateMachine {
         }
     }
 
+    // location setter: perform special behavior based on destination
     @Override
     public void setCurrentLocation(Location location) {
         super.setCurrentLocation(location);

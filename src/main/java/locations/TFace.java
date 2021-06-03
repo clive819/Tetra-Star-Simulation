@@ -4,6 +4,8 @@ import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
 
+// TFace:
+// Abstract class containing all the necessary control methods for a TFace (spawning and simulation control)
 public abstract class TFace {
     public abstract Location getAdjacent(Location currentLocation, boolean heroBaseAllowed, boolean hasTFlier, boolean roverAllowed);
 

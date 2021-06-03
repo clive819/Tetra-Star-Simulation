@@ -5,6 +5,9 @@ import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
 
+// Tetra: (singleton)
+// contains the planet class which holds the representation of the face of the planet (can be non-rectangular)
+// also holds the date and carrys nextStep() annd reset() commands to the tFace
 public class Tetra {
 
     public static Tetra shared = new Tetra();

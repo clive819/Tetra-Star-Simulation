@@ -13,6 +13,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+// TRectangularFace:
+// defines all the necessary methods of a TFace under a rectangular context
 public class TRectangularFace extends TFace {
 
     public int rows;

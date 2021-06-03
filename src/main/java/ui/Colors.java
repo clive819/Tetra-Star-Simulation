@@ -1,7 +1,9 @@
-package main.java.characters;
+package main.java.ui;
 
 import java.awt.*;
 
+//Colors:
+//data-centric location to hold centralized color values
 public class Colors {
 
     public static class Terrain {

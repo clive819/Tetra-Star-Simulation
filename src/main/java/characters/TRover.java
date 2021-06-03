@@ -10,6 +10,8 @@ import main.java.stateMachine.StateMachine;
 
 import java.util.ArrayList;
 
+// TRover:
+// Basic inhabitant that moves to an adjacent tile each step
 public class TRover implements StateMachine {
 
     public String id;
@@ -42,6 +44,7 @@ public class TRover implements StateMachine {
         }
     }
 
+    // commands can be readded into the queue to stall it by a turn
     public void delayExecute(Command command) {
         queue.add(0, command);
     }
@@ -51,6 +54,7 @@ public class TRover implements StateMachine {
         //currently used to allow TVader to break backtrace
     }
 
+    // add and execute the next command
     @Override
     public void update() {
         if (queue.isEmpty()) {
@@ -60,6 +64,7 @@ public class TRover implements StateMachine {
         queue.remove(0).execute();
     }
 
+    //getters and setters
     public void setCurrentLocation(Location location) {
         currentLocation = location;
     }

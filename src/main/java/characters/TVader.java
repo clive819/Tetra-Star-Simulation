@@ -12,6 +12,8 @@ import main.java.stateMachine.StateMachine;
 
 import java.util.ArrayList;
 
+//TVader:
+//can steal maps from mapbases back to TVader base
 public class TVader extends TRover implements StateMachine {
 
     private TFlier tFlier;
@@ -43,6 +45,7 @@ public class TVader extends TRover implements StateMachine {
         }
     }
 
+    // location setter: perform special behavior based on destination
     @Override
     public void setCurrentLocation(Location location) {
         super.setCurrentLocation(location);

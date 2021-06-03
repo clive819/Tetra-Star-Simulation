@@ -1,6 +1,6 @@
 package main.java.locations;
 
-import main.java.characters.Colors;
+import main.java.ui.Colors;
 import main.java.characters.TFlier;
 import main.java.characters.TRover;
 import main.java.starMap.AbstractStarMap;
@@ -8,6 +8,10 @@ import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
 
+// Location:
+// a single tile of the face of the planet
+// responsible for containing and rendering inhabitants
+// (assumes rectangular-ness)
 public class Location {
 
     int row;
@@ -27,6 +31,10 @@ public class Location {
         this.id = id;
         starMap = null;
     }
+
+    /////
+    //info getters and setters section
+    /////
 
     public boolean isEmpty(boolean requireGround) {
         return rover == null && (!requireGround || terrain == Terrain.ground);
@@ -62,6 +70,10 @@ public class Location {
         }
         starMap.setLocation(this);
     }
+
+    /////
+    //render section
+    /////
 
     public void render(Graphics g, TetraUIDrawingPanel p, TRectangularFace f) {
         renderTerrain(g, p, f);

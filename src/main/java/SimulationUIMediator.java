@@ -5,6 +5,8 @@ import main.java.ui.TetraUIDrawingPanel;
 
 import java.awt.*;
 
+// SimulationUIMediator:
+// class utilizing the mediator pattern to connect communication between the MVC objects
 public class SimulationUIMediator {
     private TetraUIButtonsPanel buttonsPanel;
     private TetraUIDrawingPanel drawingPanel;
