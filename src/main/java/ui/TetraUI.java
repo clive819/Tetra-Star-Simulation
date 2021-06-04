@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 public class TetraUI {
     public MainUIPanel mainUIPanel;
-    public ActionListener buttonListener;
 
     public TetraUI() {
         mainUIPanel = new MainUIPanel();

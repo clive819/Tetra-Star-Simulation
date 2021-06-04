@@ -12,7 +12,15 @@ public class TetraStarSimulator {
     public SimulationUIMediator mediator;
 
     public TetraStarSimulator() {
-        Tetra.shared.setTFace(new TRectangularFace(5, 8));
+        Tetra.shared.setTFace(new TRectangularFace(5, 7));
+    }
+
+    public void setupSimulation() {
+        Tetra.shared.tFace.spawnRover();
+        Tetra.shared.tFace.spawnHero();
+        //Tetra.shared.tFace.spawnHero();
+        Tetra.shared.tFace.spawnVader();
+        Tetra.shared.tFace.spawnMapBase();
     }
 
     public void start() {
@@ -42,13 +50,6 @@ public class TetraStarSimulator {
             this.mediator = mediator;
             mediator.setSimulation(this);
         }
-    }
-
-    public void setupSimulation() {
-        Tetra.shared.tFace.spawnHero();
-        Tetra.shared.tFace.spawnHero();
-        Tetra.shared.tFace.spawnVader();
-        Tetra.shared.tFace.spawnMapBase();
     }
 
     ///////////////

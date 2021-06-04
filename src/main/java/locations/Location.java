@@ -184,12 +184,15 @@ public class Location {
 
         g.setColor(Colors.StarMap.text);
 
-        String extraMapCount = "";
+        String extraText = "";
         int numItems = starMap.numberOfItems();
-        if(numItems > 1){
-            extraMapCount = " x" + numItems;
+        if(starMap.isEncrypted()){
+            extraText += "E";
         }
-        g.drawString("map" + extraMapCount,finalX, finalY + finalHeight);
+        if(numItems > 1){
+            extraText += " x" + numItems;
+        }
+        g.drawString("map" + extraText,finalX, finalY + finalHeight);
     }
 
     @Override
