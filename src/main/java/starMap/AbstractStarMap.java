@@ -17,7 +17,7 @@ public abstract class AbstractStarMap implements Cloneable {
 
     public static int count = 0;
 
-    static HashSet<String> locations = new HashSet<>();
+    private static final HashSet<String> locations = new HashSet<>();
 
 
     public AbstractStarMap(String id, Location base) {

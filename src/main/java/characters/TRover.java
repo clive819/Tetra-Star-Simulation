@@ -69,11 +69,11 @@ public class TRover implements StateMachine {
         currentLocation = location;
     }
 
-    public AbstractStarMap getStarMap(){
+    public AbstractStarMap getStarMap() {
         return null;
     }
 
-    public TFlier getFlier(){
+    public TFlier getFlier() {
         return null;
     }
 

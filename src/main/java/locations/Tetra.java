@@ -23,8 +23,8 @@ public class Tetra {
 
     public void nextStep() {
         TLogger.shared.log(">>>>>>>>> day " + day + "! <<<<<<<<<");
-        day++;
         tFace.nextStep();
+        day++;
     }
 
     public void reset() {
