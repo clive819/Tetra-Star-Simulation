@@ -1,6 +1,6 @@
 # Tetra Star Simulation
 
-Please refer to [Project Description](Project Description.pdf) for more information.
+Please refer to [Project Description](./Project%20Description.pdf) for more information.
 
 ## Program Launch
 
