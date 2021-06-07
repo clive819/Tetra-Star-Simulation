@@ -146,4 +146,7 @@ Temporary Items
 .apdisk
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all,macos
+
 *.pdf
+!Project Description.pdf
+!Tetra.pdf
